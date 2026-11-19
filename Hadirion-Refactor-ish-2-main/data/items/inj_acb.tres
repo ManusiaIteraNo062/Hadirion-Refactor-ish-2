@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Item" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="1_x0o5f"]
+[ext_resource type="Script" path="res://scripts/data/item.gd" id="2_4rnl4"]
+
+[sub_resource type="Resource" id="Resource_norc1"]
+script = ExtResource("1_x0o5f")
+kind = 11
+
+[resource]
+script = ExtResource("2_4rnl4")
+id = "inj_acb"
+sort_order = 7
+item_name = "Inj-ACB"
+category = "Admin's Special"
+cost = 50
+heal_amount = 0
+buffs = Array[ExtResource("1_x0o5f")]([SubResource("Resource_norc1")])
+description = "Buff \"Inj-ACB\": +15 Capability selama 3 giliran. Setelah habis, penerima kehilangan 10% HP maksimal."

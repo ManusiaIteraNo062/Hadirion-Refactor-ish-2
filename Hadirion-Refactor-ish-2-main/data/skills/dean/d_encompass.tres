@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_365ch"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_4tspy"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_o5mps"]
+
+[sub_resource type="Resource" id="Resource_45081"]
+script = ExtResource("1_365ch")
+move_name = "Encompass"
+type = 1
+target_type = 1
+energy_cost = 2
+power = 0
+description = "Rantai melingkar mengurung semua musuh dalam Stun, sementara Dean menarik napas."
+scaling_mult = 0.0
+stun_turns = 1
+deals_damage = false
+self_heal_flat = 15
+formula = "Stun semua musuh. Dean pulih 15 + (Capability / 4, dibulatkan ke bawah) HP."
+self_heal_per_cap = 0.25
+
+[resource]
+script = ExtResource("3_o5mps")
+id = "d_encompass"
+owner_id = "dean"
+display_name = "Encompass"
+cost_text = "2 Energy"
+summary = "Rantai melingkar mengurung semua musuh dalam Stun, sementara Dean menarik napas."
+formula = "Stun semua musuh. Dean pulih 15 + (Capability / 4, dibulatkan ke bawah) HP."
+moves = Array[ExtResource("1_365ch")]([SubResource("Resource_45081")])
+sort_order = 12

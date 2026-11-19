@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CharacterTemplate" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/character_template.gd" id="1_c0rds"]
+
+[resource]
+script = ExtResource("1_c0rds")
+id = "radik"
+display_name = "Radik"
+health = 85
+attack = 12
+capability = 7
+speed = 16
+base_upgrade_id = "radik_parang"
+basic_name = "Aparang"
+color = Color(0.95, 0.6, 0.25, 1)
+party_order = 1

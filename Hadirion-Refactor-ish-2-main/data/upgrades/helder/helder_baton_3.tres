@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/upgrade.gd" id="1_kns7b"]
+
+[resource]
+script = ExtResource("1_kns7b")
+id = "helder_baton_3"
+sort_order = 2
+display_name = "110% Charged Baton"
+owner_id = "helder"
+tier = 2
+cost = 100
+bonus_health = 13
+bonus_strength = 8
+bonus_capability = 6
+description = "Meningkatkan output energi Baton"
+passive_kind = 12
+passive_value = 55
+effect_text = "Verlichting (ditingkatkan): peluangnya menjadi 55%."

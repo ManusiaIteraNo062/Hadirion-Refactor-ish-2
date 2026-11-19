@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/upgrade.gd" id="1_1kiwa"]
+
+[resource]
+script = ExtResource("1_1kiwa")
+id = "wyg_frame"
+sort_order = 9
+display_name = "WYG-01 Standard Frame"
+owner_id = "wyg01"
+description = "Perlengkapan bawaan, belum dimodifikasi."

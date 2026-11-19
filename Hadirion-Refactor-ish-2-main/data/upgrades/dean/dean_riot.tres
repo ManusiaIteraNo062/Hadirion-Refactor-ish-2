@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/upgrade.gd" id="1_2j25k"]
+
+[resource]
+script = ExtResource("1_2j25k")
+id = "dean_riot"
+sort_order = 6
+display_name = "Baton & Riot Shield"
+owner_id = "dean"
+description = "Perlengkapan bawaan, belum dimodifikasi."

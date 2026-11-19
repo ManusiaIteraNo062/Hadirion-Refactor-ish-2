@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/upgrade.gd" id="1_n1gb3"]
+
+[resource]
+script = ExtResource("1_n1gb3")
+id = "helder_baton_2"
+sort_order = 1
+display_name = "Reinforce Baton"
+owner_id = "helder"
+tier = 1
+cost = 100
+bonus_health = 8
+bonus_strength = 4
+bonus_capability = 3
+description = "Mulai battle dengan efek Verlichting, yang membantu mendapatkan energi saat melakukan serangan."
+passive_kind = 12
+passive_value = 40
+effect_text = "Verlichting: 40% peluang mendapat 1 Energize setiap memakai Strike."

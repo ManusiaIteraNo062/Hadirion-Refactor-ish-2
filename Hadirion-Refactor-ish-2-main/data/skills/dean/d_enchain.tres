@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_ob14c"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_cms8w"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_556vn"]
+
+[sub_resource type="Resource" id="Resource_b2sep"]
+script = ExtResource("1_ob14c")
+move_name = "Enchain"
+type = 1
+energy_cost = 2
+power = 0
+description = "Melilitkan rantai ke satu musuh, menghantamnya, lalu mengikatnya dalam Stun."
+stun_turns = 1
+scaling_stat = 1
+formula = "Damage = Strength, lalu Stun target."
+
+[resource]
+script = ExtResource("3_556vn")
+id = "d_enchain"
+owner_id = "dean"
+display_name = "Enchain"
+cost_text = "2 Energy"
+summary = "Melilitkan rantai ke satu musuh, menghantamnya, lalu mengikatnya dalam Stun."
+formula = "Damage = Strength, lalu Stun target."
+moves = Array[ExtResource("1_ob14c")]([SubResource("Resource_b2sep")])
+sort_order = 10

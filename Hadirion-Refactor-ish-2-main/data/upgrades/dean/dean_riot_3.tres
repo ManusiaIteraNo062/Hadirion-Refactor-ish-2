@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/upgrade.gd" id="1_q42kb"]
+
+[resource]
+script = ExtResource("1_q42kb")
+id = "dean_riot_3"
+sort_order = 8
+display_name = "Energizer Core Mk2"
+owner_id = "dean"
+tier = 2
+cost = 100
+bonus_health = 52
+bonus_strength = 6
+description = "Menggunakan Core experimental yang dimaterialisasi Admin"
+passive_kind = 14
+passive_value = 3
+effect_text = "Beringin (ditingkatkan): setiap 3 giliran."

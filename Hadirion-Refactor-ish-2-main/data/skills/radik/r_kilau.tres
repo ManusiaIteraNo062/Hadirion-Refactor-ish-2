@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_bjxn3"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_pri30"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_g6k6c"]
+
+[sub_resource type="Resource" id="Resource_1fhe4"]
+script = ExtResource("2_pri30")
+kind = 9
+magnitude_per_cap = 0.25
+
+[sub_resource type="Resource" id="Resource_23y7l"]
+script = ExtResource("1_bjxn3")
+move_name = "Stance \"Kilau\""
+type = 1
+target_type = 4
+energy_cost = 1
+power = 0
+description = "Radik menyalakan semangatnya, bergerak makin ringan dan makin cepat sampai misi selesai."
+scaling_mult = 0.0
+max_uses_per_battle = 1
+grants_self = Array[ExtResource("2_pri30")]([SubResource("Resource_1fhe4")])
+formula = "Speed + (Capability / 4)."
+
+[resource]
+script = ExtResource("3_g6k6c")
+id = "r_kilau"
+owner_id = "radik"
+display_name = "Stance \"Kilau\""
+unlockable = true
+cost_text = "1 Energy, 1x per misi"
+summary = "Radik menyalakan semangatnya, bergerak makin ringan dan makin cepat sampai misi selesai."
+formula = "Speed + (Capability / 4)."
+moves = Array[ExtResource("1_bjxn3")]([SubResource("Resource_23y7l")])
+sort_order = 8

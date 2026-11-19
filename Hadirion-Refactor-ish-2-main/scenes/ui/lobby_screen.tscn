@@ -1,0 +1,85 @@
+[gd_scene format=3]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7iwv7"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.1, 0.1, 0.1, 0.85)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 0.85)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="LobbyScreenLayout" type="Control" unique_id=1896034600]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Center" type="CenterContainer" parent="." unique_id=2045553757]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=230981751]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7iwv7")
+
+[node name="Column" type="VBoxContainer" parent="Center/Panel" unique_id=520557800]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="Center/Panel/Column" unique_id=567990297]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "KULON CONCIERGE & JOINERY INC."
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="Center/Panel/Column" unique_id=1253558649]
+modulate = Color(1, 1, 1, 0.6)
+layout_mode = 2
+text = "Lobby"
+horizontal_alignment = 1
+
+[node name="FragmentsLabel" type="Label" parent="Center/Panel/Column" unique_id=566104442]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="MissionsButton" type="Button" parent="Center/Panel/Column" unique_id=183190054]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+text = "Take a Mission"
+
+[node name="WorkshopButton" type="Button" parent="Center/Panel/Column" unique_id=182476638]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+text = "Admin's Workshop"
+
+[node name="TrainingButton" type="Button" parent="Center/Panel/Column" unique_id=1041196554]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+text = "Training"
+
+[node name="EncyclopediaButton" type="Button" parent="Center/Panel/Column" unique_id=377895992]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+text = "Enemy Encyclopedia"
+
+[node name="MainMenuButton" type="Button" parent="Center/Panel/Column" unique_id=1513747228]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+text = "Main Menu"

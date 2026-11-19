@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_fqiby"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_r3vg6"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_bkgkw"]
+
+[sub_resource type="Resource" id="Resource_5s2wt"]
+script = ExtResource("1_fqiby")
+move_name = "Cannon (2 Energy)"
+type = 1
+energy_cost = 2
+power = 0
+description = "Menembakkan meriam; makin banyak Energy yang disalurkan, makin dahsyat ledakannya."
+scaling_stat = 2
+formula = "Damage = (Capability / 2) x Energy yang dipakai. Tambahan +20 damage jika memakai 4 Energy atau lebih."
+
+[sub_resource type="Resource" id="Resource_aw2in"]
+script = ExtResource("1_fqiby")
+move_name = "Cannon (3 Energy)"
+type = 1
+energy_cost = 3
+power = 0
+description = "Menembakkan meriam; makin banyak Energy yang disalurkan, makin dahsyat ledakannya."
+scaling_mult = 1.5
+scaling_stat = 2
+formula = "Damage = (Capability / 2) x Energy yang dipakai. Tambahan +20 damage jika memakai 4 Energy atau lebih."
+
+[sub_resource type="Resource" id="Resource_3kdlx"]
+script = ExtResource("1_fqiby")
+move_name = "Cannon (4 Energy)"
+type = 1
+energy_cost = 4
+power = 20
+description = "Menembakkan meriam; makin banyak Energy yang disalurkan, makin dahsyat ledakannya."
+scaling_mult = 2.0
+scaling_stat = 2
+formula = "Damage = (Capability / 2) x Energy yang dipakai. Tambahan +20 damage jika memakai 4 Energy atau lebih."
+
+[sub_resource type="Resource" id="Resource_c8vnw"]
+script = ExtResource("1_fqiby")
+move_name = "Cannon (5 Energy)"
+type = 1
+energy_cost = 5
+power = 20
+description = "Menembakkan meriam; makin banyak Energy yang disalurkan, makin dahsyat ledakannya."
+scaling_mult = 2.5
+scaling_stat = 2
+formula = "Damage = (Capability / 2) x Energy yang dipakai. Tambahan +20 damage jika memakai 4 Energy atau lebih."
+
+[resource]
+script = ExtResource("3_bkgkw")
+id = "w_cannon"
+owner_id = "wyg01"
+display_name = "Cannon"
+cost_text = "2-5 Energy (pilih sendiri)"
+summary = "Menembakkan meriam; makin banyak Energy yang disalurkan, makin dahsyat ledakannya."
+formula = "Damage = (Capability / 2) x Energy yang dipakai. Tambahan +20 damage jika memakai 4 Energy atau lebih."
+moves = Array[ExtResource("1_fqiby")]([SubResource("Resource_5s2wt"), SubResource("Resource_aw2in"), SubResource("Resource_3kdlx"), SubResource("Resource_c8vnw")])
+sort_order = 15

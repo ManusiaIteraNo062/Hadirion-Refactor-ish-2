@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_8ngc4"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_rnjuh"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_0kax6"]
+
+[sub_resource type="Resource" id="Resource_0f0rg"]
+script = ExtResource("1_8ngc4")
+move_name = "Rejuvenate"
+type = 1
+target_type = 3
+energy_cost = 2
+power = 0
+is_heal = true
+description = "Menebar kelopak cahaya yang menyembuhkan seluruh tim."
+scaling_mult = 0.0
+heal_flat_per_cap = 0.5
+formula = "Pulih = Capability / 2 untuk setiap anggota tim."
+
+[resource]
+script = ExtResource("3_0kax6")
+id = "h_rejuvenate"
+owner_id = "helder"
+display_name = "Rejuvenate"
+unlockable = true
+cost_text = "2 Energy"
+summary = "Menebar kelopak cahaya yang menyembuhkan seluruh tim."
+formula = "Pulih = Capability / 2 untuk setiap anggota tim."
+moves = Array[ExtResource("1_8ngc4")]([SubResource("Resource_0f0rg")])
+sort_order = 3

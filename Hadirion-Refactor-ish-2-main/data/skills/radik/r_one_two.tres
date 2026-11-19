@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_jdo4r"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_db26d"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_sb6a0"]
+
+[sub_resource type="Resource" id="Resource_jh1d7"]
+script = ExtResource("1_jdo4r")
+move_name = "One-Two"
+type = 1
+energy_cost = 1
+description = "Dua tebasan beruntun yang datang lebih cepat dari kedipan mata."
+scaling_mult = 0.5
+hits = 2
+scaling_stat = 2
+formula = "Damage = 10 + (Capability / 2), sebanyak 2 kali."
+
+[resource]
+script = ExtResource("3_sb6a0")
+id = "r_one_two"
+owner_id = "radik"
+display_name = "One-Two"
+cost_text = "1 Energy"
+summary = "Dua tebasan beruntun yang datang lebih cepat dari kedipan mata."
+formula = "Damage = 10 + (Capability / 2), sebanyak 2 kali."
+moves = Array[ExtResource("1_jdo4r")]([SubResource("Resource_jh1d7")])
+sort_order = 6

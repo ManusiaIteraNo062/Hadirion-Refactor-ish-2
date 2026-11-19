@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_f60lb"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_poc1x"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_35e65"]
+
+[sub_resource type="Resource" id="Resource_t7h6b"]
+script = ExtResource("1_f60lb")
+move_name = "Booster"
+type = 1
+target_type = 3
+energy_cost = 3
+power = 0
+description = "Mengalirkan energi cadangan ke seluruh tim lewat modul booster."
+scaling_mult = 0.0
+grants_energy_allies = 1
+formula = "+1 Energy untuk semua anggota tim (termasuk pemakai)."
+
+[resource]
+script = ExtResource("3_35e65")
+id = "w_booster"
+owner_id = "wyg01"
+display_name = "Booster"
+cost_text = "3 Energy"
+summary = "Mengalirkan energi cadangan ke seluruh tim lewat modul booster."
+formula = "+1 Energy untuk semua anggota tim (termasuk pemakai)."
+moves = Array[ExtResource("1_f60lb")]([SubResource("Resource_t7h6b")])
+sort_order = 17

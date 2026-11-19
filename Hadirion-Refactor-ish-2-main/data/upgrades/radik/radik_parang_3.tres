@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/upgrade.gd" id="1_3ua3t"]
+
+[resource]
+script = ExtResource("1_3ua3t")
+id = "radik_parang_3"
+sort_order = 5
+display_name = "Trifect Edge Orgast"
+owner_id = "radik"
+tier = 2
+cost = 100
+bonus_health = 16
+bonus_strength = 6
+bonus_speed = 8
+description = "Modifikasi legal dengan menggunakan Blueprint ORK.Co"
+passive_kind = 13
+passive_value = 5
+effect_text = "Sakepeng (ditingkatkan): bisa menumpuk sampai 5 stack."

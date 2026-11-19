@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equipment_item.gd" id="1_pck3j"]
+
+[resource]
+script = ExtResource("1_pck3j")
+id = "thin_barrier"
+display_name = "Thin-Barrier Forcefield"
+cost = 65
+bonus_health = 30
+description = "Perisai tipis anti-fisik dan anti-hujan oleh RTO.Co"

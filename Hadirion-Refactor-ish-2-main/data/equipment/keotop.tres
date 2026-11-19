@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equipment_item.gd" id="1_uytfm"]
+
+[resource]
+script = ExtResource("1_uytfm")
+id = "keotop"
+sort_order = 3
+display_name = "Kalung Hypervent \"Keotop\""
+cost = 75
+bonus_capability = 5
+bonus_speed = 10
+description = "Kalung dengan Fragment Shangri-la yang dibentuk ke permata Intan"

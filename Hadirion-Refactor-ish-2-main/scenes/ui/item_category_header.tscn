@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="FontFile" path="res://assets/fonts/Cinzel.ttf" id="1_8vgtt"]
+
+[sub_resource type="FontVariation" id="FontVariation_rbxbu"]
+base_font = ExtResource("1_8vgtt")
+variation_embolden = 0.35
+
+[node name="CategoryHeader" type="VBoxContainer" unique_id=429742964]
+theme_override_constants/separation = 0
+
+[node name="TitleLabel" type="Label" parent="." unique_id=378956290]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_rbxbu")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.38, 0.86, 0.82, 1)
+
+[node name="FlavorLabel" type="Label" parent="." unique_id=1983417505]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.65)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13

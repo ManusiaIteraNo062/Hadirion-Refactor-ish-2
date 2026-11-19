@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_27pi6"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_ui7wh"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_sv2pt"]
+
+[sub_resource type="Resource" id="Resource_xro6b"]
+script = ExtResource("1_27pi6")
+move_name = "Firecracker"
+type = 1
+target_type = 1
+energy_cost = 2
+power = 15
+description = "Menembakkan Cluster Rocket yang menghujani area dua kali."
+scaling_mult = 0.2
+hits = 2
+scaling_stat = 2
+formula = "Damage = 15 + (Capability / 5), sebanyak 2 kali ke semua musuh."
+
+[resource]
+script = ExtResource("3_sv2pt")
+id = "w_firecracker"
+owner_id = "wyg01"
+display_name = "Firecracker"
+unlockable = true
+cost_text = "2 Energy"
+summary = "Menembakkan Cluster Rocket yang menghujani area dua kali."
+formula = "Damage = 15 + (Capability / 5), sebanyak 2 kali ke semua musuh."
+moves = Array[ExtResource("1_27pi6")]([SubResource("Resource_xro6b")])
+sort_order = 19

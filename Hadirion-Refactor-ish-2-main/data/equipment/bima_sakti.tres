@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equipment_item.gd" id="1_msb4o"]
+
+[resource]
+script = ExtResource("1_msb4o")
+id = "bima_sakti"
+sort_order = 7
+display_name = "A-Enh \"Bima Sakti\" by Dunya.Corp"
+cost = 75
+bonus_health = 20
+bonus_capability = 10
+description = "Tato tubuh yang bisa dilepas pasang dengan corak custom"

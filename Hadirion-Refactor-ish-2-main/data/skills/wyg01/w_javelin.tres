@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_gvoll"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_x4x68"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_btxw8"]
+
+[sub_resource type="Resource" id="Resource_pgupg"]
+script = ExtResource("1_gvoll")
+move_name = "Javelin"
+type = 1
+energy_cost = 2
+power = 15
+description = "Melontarkan lembing berujung Fragment; musuh yang sudah lemah akan terkena Stun."
+scaling_mult = 0.3333333333333333
+scaling_stat = 2
+stun_if_target_below_hp_pct = 0.5
+formula = "Damage = 15 + (Capability / 3). Stun jika HP target < 50%."
+
+[resource]
+script = ExtResource("3_btxw8")
+id = "w_javelin"
+owner_id = "wyg01"
+display_name = "Javelin"
+unlockable = true
+cost_text = "2 Energy"
+summary = "Melontarkan lembing berujung Fragment; musuh yang sudah lemah akan terkena Stun."
+formula = "Damage = 15 + (Capability / 3). Stun jika HP target < 50%."
+moves = Array[ExtResource("1_gvoll")]([SubResource("Resource_pgupg")])
+sort_order = 18

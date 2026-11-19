@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/upgrade.gd" id="1_4kelx"]
+
+[resource]
+script = ExtResource("1_4kelx")
+id = "radik_parang_2"
+sort_order = 4
+display_name = "Polished Blade"
+owner_id = "radik"
+tier = 1
+cost = 100
+bonus_health = 8
+bonus_strength = 3
+bonus_speed = 4
+description = "Mulai battle dengan efek Sakepeng, yang memperingan pergerakan penggunanya di setiap serangan"
+passive_kind = 13
+passive_value = 3
+effect_text = "Sakepeng: setiap Strike menambah 1 stack (maks 3). Tiap stack memberi +2 Speed."

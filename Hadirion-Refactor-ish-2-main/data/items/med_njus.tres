@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="1_vs2hd"]
+[ext_resource type="Script" path="res://scripts/data/item.gd" id="2_tpyqj"]
+
+[resource]
+script = ExtResource("2_tpyqj")
+id = "med_njus"
+sort_order = 2
+item_name = "Med-Njus"
+category = "Heal Items"
+cost = 5
+heal_amount = 0
+heal_pct = 20.0
+description = "Memulihkan 20% HP."

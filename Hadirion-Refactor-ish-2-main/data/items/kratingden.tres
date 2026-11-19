@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="1_axsbe"]
+[ext_resource type="Script" path="res://scripts/data/item.gd" id="2_q508m"]
+
+[resource]
+script = ExtResource("2_q508m")
+id = "kratingden"
+sort_order = 4
+item_name = "Kratingden"
+category = "Booster Items"
+cost = 25
+heal_amount = 0
+heal_pct = 10.0
+energy_gain = 2
+description = "Memulihkan 10% HP dan memberi 2 Energy."

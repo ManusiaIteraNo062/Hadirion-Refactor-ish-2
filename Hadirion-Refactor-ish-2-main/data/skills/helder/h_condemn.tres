@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_ilrtw"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_qfltf"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_phcyr"]
+
+[sub_resource type="Resource" id="Resource_3wgsr"]
+script = ExtResource("1_ilrtw")
+move_name = "Condemn"
+type = 1
+energy_cost = 2
+power = 20
+description = "Menghantamkan seberkas cahaya yang menghukum satu musuh. Jika musuh tumbang, cahayanya memulihkan Helder."
+scaling_stat = 1
+heal_self_on_kill_pct = 10.0
+formula = "Damage = 20 + Strength. Pulih 10% HP maks jika musuh tumbang."
+
+[resource]
+script = ExtResource("3_phcyr")
+id = "h_condemn"
+owner_id = "helder"
+display_name = "Condemn"
+cost_text = "2 Energy"
+summary = "Menghantamkan seberkas cahaya yang menghukum satu musuh. Jika musuh tumbang, cahayanya memulihkan Helder."
+formula = "Damage = 20 + Strength. Pulih 10% HP maks jika musuh tumbang."
+moves = Array[ExtResource("1_ilrtw")]([SubResource("Resource_3wgsr")])
+sort_order = 1

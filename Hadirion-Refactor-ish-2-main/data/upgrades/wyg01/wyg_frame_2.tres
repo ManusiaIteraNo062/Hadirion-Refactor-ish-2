@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/upgrade.gd" id="1_2nd6j"]
+
+[resource]
+script = ExtResource("1_2nd6j")
+id = "wyg_frame_2"
+sort_order = 10
+display_name = "Reinforced Body"
+owner_id = "wyg01"
+tier = 1
+cost = 100
+bonus_health = 13
+bonus_capability = 4
+description = "Mulai battle dengan efek Resonance, membuat chassis memperkuat diri sendiri ditengah pertarungan"
+passive_kind = 15
+passive_value = 3
+effect_text = "Resonance: setiap Strike menambah 1 stack (maks 3). Tiap stack memberi +3 Capability."

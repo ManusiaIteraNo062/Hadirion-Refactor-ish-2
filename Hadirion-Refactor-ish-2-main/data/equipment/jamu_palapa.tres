@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equipment_item.gd" id="1_fq0p8"]
+
+[resource]
+script = ExtResource("1_fq0p8")
+id = "jamu_palapa"
+sort_order = 8
+display_name = "Dimensional Bev - Jamu cap Palapa"
+cost = 75
+bonus_health = -20
+bonus_capability = 20
+bonus_speed = 5
+description = "Kantung Dimensional yang berisi Jamu Cabe"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Upgrade" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/upgrade.gd" id="1_7tsks"]
+
+[resource]
+script = ExtResource("1_7tsks")
+id = "dean_riot_2"
+sort_order = 7
+display_name = "Armor Refitting"
+owner_id = "dean"
+tier = 1
+cost = 100
+bonus_health = 26
+bonus_strength = 3
+description = "Mulai battle dengan efek Beringin, membantu pengguna untuk memulihkan tenaga ditengah pertarungan"
+passive_kind = 14
+passive_value = 4
+effect_text = "Beringin: mendapat 1 Energy di awal giliran setiap 4 giliran."

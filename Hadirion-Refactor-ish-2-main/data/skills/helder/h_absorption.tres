@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_uxs8b"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_u6vli"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_r30pi"]
+
+[sub_resource type="Resource" id="Resource_mqnc5"]
+script = ExtResource("1_uxs8b")
+move_name = "Absorption"
+type = 1
+target_type = 1
+energy_cost = 3
+description = "Meledakkan kilau putih ke semua musuh, lalu menyerap sebagian cahayanya kembali menjadi tenaga."
+scaling_mult = 0.2
+lifesteal = 0.3
+scaling_stat = 1
+formula = "Damage = 10 + (Strength / 5) ke semua musuh. Pulih 30% dari damage yang diberikan."
+
+[resource]
+script = ExtResource("3_r30pi")
+id = "h_absorption"
+owner_id = "helder"
+display_name = "Absorption"
+cost_text = "3 Energy"
+summary = "Meledakkan kilau putih ke semua musuh, lalu menyerap sebagian cahayanya kembali menjadi tenaga."
+formula = "Damage = 10 + (Strength / 5) ke semua musuh. Pulih 30% dari damage yang diberikan."
+moves = Array[ExtResource("1_uxs8b")]([SubResource("Resource_mqnc5")])
+sort_order = 2

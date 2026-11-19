@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_cps0r"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_jxhv2"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_gxcgh"]
+
+[sub_resource type="Resource" id="Resource_l1nir"]
+script = ExtResource("1_cps0r")
+move_name = "Flicking"
+type = 1
+energy_cost = 1
+power = 0
+description = "Menjentikkan percikan cahaya kecil yang melesat ke satu musuh."
+scaling_stat = 1
+formula = "Damage = Strength."
+
+[resource]
+script = ExtResource("3_gxcgh")
+id = "h_flicking"
+owner_id = "helder"
+display_name = "Flicking"
+unlockable = true
+cost_text = "1 Energy"
+summary = "Menjentikkan percikan cahaya kecil yang melesat ke satu musuh."
+formula = "Damage = Strength."
+moves = Array[ExtResource("1_cps0r")]([SubResource("Resource_l1nir")])
+sort_order = 4

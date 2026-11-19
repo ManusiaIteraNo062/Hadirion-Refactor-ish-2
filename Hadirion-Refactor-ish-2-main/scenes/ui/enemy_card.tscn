@@ -1,0 +1,58 @@
+[gd_scene format=3]
+
+[ext_resource type="FontFile" path="res://assets/fonts/Cinzel.ttf" id="1_6simt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xc16l"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.13, 0.14, 0.15, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.3, 0.32, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="FontVariation" id="FontVariation_rbxbu"]
+base_font = ExtResource("1_6simt")
+variation_embolden = 0.35
+
+[node name="EnemyCard" type="PanelContainer" unique_id=338570130]
+theme_override_styles/panel = SubResource("StyleBoxFlat_xc16l")
+
+[node name="Column" type="VBoxContainer" parent="." unique_id=1430388852]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Head" type="HBoxContainer" parent="Column" unique_id=259877502]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NameLabel" type="Label" parent="Column/Head" unique_id=1143043723]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_rbxbu")
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.92, 1, 0.98, 1)
+
+[node name="BossTag" type="Label" parent="Column/Head" unique_id=1498375505]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+tooltip_text = "Musuh ini mendapat Stun Immunity saat darah menyentuh 60% HP"
+mouse_filter = 0
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.9, 0.5, 0.2, 1)
+text = "BOSS"
+
+[node name="HpLabel" type="Label" parent="Column" unique_id=1611846496]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.38, 0.86, 0.82, 1)

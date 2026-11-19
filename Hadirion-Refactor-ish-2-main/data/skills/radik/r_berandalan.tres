@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_5uanl"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_4u5cs"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_pq3gc"]
+
+[sub_resource type="Resource" id="Resource_dq451"]
+script = ExtResource("1_5uanl")
+move_name = "\"Berandalan\""
+type = 1
+energy_cost = 4
+power = 0
+description = "Menerjang nekat dengan seluruh tenaga dan kecepatan. Jika musuh tumbang, napas Radik kembali."
+speed_mult = 1.5
+scaling_stat = 2
+energy_on_kill = 2
+formula = "Damage = Capability + (Speed x 1.5). +2 Energy jika musuh tumbang."
+
+[resource]
+script = ExtResource("3_pq3gc")
+id = "r_berandalan"
+owner_id = "radik"
+display_name = "\"Berandalan\""
+unlockable = true
+cost_text = "4 Energy"
+summary = "Menerjang nekat dengan seluruh tenaga dan kecepatan. Jika musuh tumbang, napas Radik kembali."
+formula = "Damage = Capability + (Speed x 1.5). +2 Energy jika musuh tumbang."
+moves = Array[ExtResource("1_5uanl")]([SubResource("Resource_dq451")])
+sort_order = 9

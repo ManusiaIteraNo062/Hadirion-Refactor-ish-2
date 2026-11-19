@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_fgesu"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_d1fyj"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_8k2g8"]
+
+[sub_resource type="Resource" id="Resource_qecyt"]
+script = ExtResource("2_d1fyj")
+kind = 8
+magnitude = 3
+
+[sub_resource type="Resource" id="Resource_vpxo3"]
+script = ExtResource("1_fgesu")
+move_name = "Stance \"Heroik\""
+type = 1
+target_type = 4
+energy_cost = 1
+power = 0
+description = "Radik berdiri tegap dalam Guard Stance sambil mengumpulkan tenaga untuk giliran berikutnya."
+scaling_mult = 0.0
+max_uses_per_battle = 2
+grants_self = Array[ExtResource("2_d1fyj")]([SubResource("Resource_qecyt")])
+self_guard = true
+formula = "Guard sampai ronde berikutnya. +3 Energy di awal giliran berikutnya."
+
+[resource]
+script = ExtResource("3_8k2g8")
+id = "r_heroik"
+owner_id = "radik"
+display_name = "Stance \"Heroik\""
+cost_text = "1 Energy, 2x per misi"
+summary = "Radik berdiri tegap dalam Guard Stance sambil mengumpulkan tenaga untuk giliran berikutnya."
+formula = "Guard sampai ronde berikutnya. +3 Energy di awal giliran berikutnya."
+moves = Array[ExtResource("1_fgesu")]([SubResource("Resource_vpxo3")])
+sort_order = 7

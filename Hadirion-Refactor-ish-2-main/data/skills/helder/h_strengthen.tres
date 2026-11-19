@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_mc8x3"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_04oyi"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_3vkmu"]
+
+[sub_resource type="Resource" id="Resource_phsoy"]
+script = ExtResource("2_04oyi")
+kind = 5
+magnitude_per_cap = 0.25
+
+[sub_resource type="Resource" id="Resource_mkbgj"]
+script = ExtResource("1_mc8x3")
+move_name = "Strengthen"
+type = 1
+target_type = 4
+energy_cost = 1
+power = 0
+description = "Cahaya hangat Oxypetalum menyelimuti Helder, menguatkan setiap pukulannya sampai misi selesai."
+scaling_mult = 0.0
+max_uses_per_battle = 2
+grants_self = Array[ExtResource("2_04oyi")]([SubResource("Resource_phsoy")])
+formula = "Strength + (Capability / 4). Bisa dipakai 2 kali dan bertumpuk."
+
+[resource]
+script = ExtResource("3_3vkmu")
+id = "h_strengthen"
+owner_id = "helder"
+display_name = "Strengthen"
+cost_text = "1 Energy, 2x per misi"
+summary = "Cahaya hangat Oxypetalum menyelimuti Helder, menguatkan setiap pukulannya sampai misi selesai."
+formula = "Strength + (Capability / 4). Bisa dipakai 2 kali dan bertumpuk."
+moves = Array[ExtResource("1_mc8x3")]([SubResource("Resource_mkbgj")])

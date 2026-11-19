@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equipment_item.gd" id="1_qxipk"]
+
+[resource]
+script = ExtResource("1_qxipk")
+id = "mev_equipment"
+sort_order = 1
+display_name = "M.E.V Mandated Agent Equipment"
+cost = 100
+bonus_health = 20
+bonus_strength = 5
+bonus_capability = 5
+description = "Basic Equipment yang dikhususkan untuk Agen M.E.R"

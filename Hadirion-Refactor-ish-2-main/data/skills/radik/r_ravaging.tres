@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_hcdxt"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_f8bni"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_ni218"]
+
+[sub_resource type="Resource" id="Resource_g2hsp"]
+script = ExtResource("1_hcdxt")
+move_name = "Ravaging"
+type = 1
+target_type = 1
+energy_cost = 3
+power = 20
+description = "Serangan bertubi yang cepat, menyapu semua musuh dalam satu rentetan."
+scaling_stat = 3
+formula = "Damage = (10 + (Speed / 2)) x 2 ke semua musuh."
+
+[resource]
+script = ExtResource("3_ni218")
+id = "r_ravaging"
+owner_id = "radik"
+display_name = "Ravaging"
+cost_text = "3 Energy"
+summary = "Serangan bertubi yang cepat, menyapu semua musuh dalam satu rentetan."
+formula = "Damage = (10 + (Speed / 2)) x 2 ke semua musuh."
+moves = Array[ExtResource("1_hcdxt")]([SubResource("Resource_g2hsp")])
+sort_order = 5

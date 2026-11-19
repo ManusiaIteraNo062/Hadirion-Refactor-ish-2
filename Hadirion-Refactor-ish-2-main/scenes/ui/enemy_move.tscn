@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[node name="EnemyMove" type="RichTextLabel" unique_id=1500311610]
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+fit_content = true
+scroll_active = false

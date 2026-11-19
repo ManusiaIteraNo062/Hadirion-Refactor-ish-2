@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="1_mrs5t"]
+[ext_resource type="Script" path="res://scripts/data/item.gd" id="2_1drax"]
+
+[resource]
+script = ExtResource("2_1drax")
+id = "meg_r3v"
+sort_order = 1
+item_name = "M.E.G-R3V"
+category = "Revive Items"
+cost = 35
+heal_amount = 0
+heal_pct = 30.0
+revive = true
+description = "Menghidupkan kembali rekan yang tumbang dengan 30% HP."

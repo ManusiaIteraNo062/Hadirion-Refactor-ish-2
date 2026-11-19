@@ -1,0 +1,127 @@
+extends Resource
+class_name Move
+## A single Basic or Alteration move. Basic moves are always usable;
+## Alteration moves cost energy from the user's own bar (rule 5).
+##
+## Damage formula for a hit:
+##   power + (Attack or Capability) * scaling_mult + Speed * speed_mult
+## Attack is used for BASIC moves, Capability for ALTERATION moves.
+
+enum Type { BASIC, ALTERATION }
+enum Target { SINGLE_ENEMY, ALL_ENEMIES, SINGLE_ALLY, ALL_ALLIES, SELF }
+## Which stat `scaling_mult` multiplies. AUTO = Strength for BASIC moves, Capability for ALTERATION.
+enum Stat { AUTO, STRENGTH, CAPABILITY, SPEED }
+
+@export var move_name: String = "Attack"
+@export var type: Type = Type.BASIC
+@export var target_type: Target = Target.SINGLE_ENEMY
+@export var energy_cost: int = 0 # only relevant when type == ALTERATION
+@export var power: int = 10
+@export var is_heal: bool = false # true for support Alterations, e.g. Cure
+@export_multiline var description: String = ""
+
+# --- Damage shaping ---------------------------------------------------------
+@export var scaling_mult: float = 1.0   # multiplier on the scaling stat (Condemn = 20)
+@export var speed_mult: float = 0.0     # adds Speed * this to damage (Stylish = 1)
+@export var hits: int = 1               # multi-hit moves (Heroic = 2)
+
+# --- Extra effects ----------------------------------------------------------
+@export var lifesteal: float = 0.0      # fraction of damage dealt healed back to the user (Absorption = 1.0)
+@export var stun_turns: int = 0         # > 0 stuns the target on hit (Backhand = 1)
+
+## Execute: if > 0, after the hit the target is KO'd when its HP is below
+##   execute_base + Capability * execute_per_cap
+## (Condemn: base 50, per_cap 7.5 = 50 + (Capability / 2) * 15)
+@export var execute_base: int = 0
+@export var execute_per_cap: float = 0.0
+
+## 0 = unlimited. Otherwise the move can only be used this many times per battle.
+@export var max_uses_per_battle: int = 0
+
+## false = the move still has to connect (dodge applies) but deals no damage;
+## only its side effects happen (Taksaka - Secure: stun + self-heal).
+@export var deals_damage: bool = true
+
+## On hit, the user heals max_health * Capability * this.
+## (Taksaka - Secure: 1.0 / 125.0 = Capability/125 of max HP)
+@export var self_heal_max_hp_per_cap: float = 0.0
+
+## Percent-of-max-HP heals (set is_heal = true): the target recovers
+##   (heal_pct_base + Capability * heal_pct_per_cap) % of ITS max HP.
+## (WYG-01 // Supplication: base 10, per_cap 0.5 = 10% + Capability/2 %)
+## If both are 0, the old flat heal (power + Capability) is used.
+@export var heal_pct_base: float = 0.0
+@export var heal_pct_per_cap: float = 0.0
+
+# --- Status effects (see StatusDefs) ---------------------------------------
+
+## Applied to the TARGET on every hit that connects (Gloop, Fire, Poison...).
+## Multi-hit moves apply it once per hit.
+@export var inflicts: Array[StatusApplication] = []
+
+## Applied to the USER once per use (Time Dilation, Flame Wings...).
+@export var grants_self: Array[StatusApplication] = []
+
+## true = stun and `inflicts` still land when the target dodges
+## (Red Sleigh - Clockwatch). The damage can still be dodged.
+@export var effects_ignore_dodge: bool = false
+
+## Enemy cooldown: after use, the move can't be used for this many of the
+## unit's next turns. 0 = no cooldown. Mobs treat moves with a cooldown as
+## their "big attacks" and prefer them whenever they are ready.
+@export var cooldown: int = 0
+
+## true = `inflicts` lands on every hit that connects (Firefist: 1 Fire per hit).
+## false = once per target per use, on the first hit that connects
+## (Clawing: 2 hits, but only 2 Gloop in total).
+@export var inflicts_per_hit: bool = true
+
+# --- Player skill effects (Alteration port) --------------------------------
+
+@export var scaling_stat: Stat = Stat.AUTO
+
+## Heals the user for this % of ITS max HP when this move kills its target (Condemn: 10).
+@export var heal_self_on_kill_pct: float = 0.0
+## Gives the user this much energy when this move kills its target (Berandalan: 2).
+@export var energy_on_kill: int = 0
+## Heals the user this much, ONCE per use (Encompass: 15).
+@export var self_heal_flat: int = 0
+## Flat heal for is_heal moves: Capability * this, rounded up (Rejuvenate: 0.5).
+@export var heal_flat_per_cap: float = 0.0
+## Gives every target this much energy (Booster: 1, with target ALL_ALLIES).
+@export var grants_energy_allies: int = 0
+## The user counts as guarding after this move (Heroik, Overcome).
+@export var self_guard: bool = false
+## > 0: stun the target (1 turn) only if its HP fraction is below this BEFORE the hit (Javelin: 0.5).
+@export var stun_if_target_below_hp_pct: float = 0.0
+
+## Every number shown or dealt by player moves is rounded UP (e.g. 12.2 -> 13).
+## The tiny subtraction stops float noise (3.0000000000000004) from rounding to 4.
+static func round_up(x: float) -> int:
+	return ceili(x - 0.0001)
+
+## Damage of ONE hit for the given stats (before crit/Guard/Gloop/Time Dilation).
+## Single source of truth: BattleManager and the workshop preview both use it.
+func damage_per_hit(strength: int, capability: int, speed: int) -> int:
+	var stat: int
+	match scaling_stat:
+		Stat.STRENGTH:
+			stat = strength
+		Stat.CAPABILITY:
+			stat = capability
+		Stat.SPEED:
+			stat = speed
+		_:
+			stat = capability if type == Type.ALTERATION else strength
+	return maxi(1, round_up(power + stat * scaling_mult + speed * speed_mult))
+
+# --- Shown in the battle menu when hovering the move ----------------------
+@export var formula: String = ""                 # the damage / effect calculation
+var skill_id: String = ""                        # which SkillLibrary skill built it (for the live preview)
+
+## Heals the user for this x Capability (rounded DOWN) on top of self_heal_flat, once per use
+## (Encompass: 15 + Capability / 4).
+@export var self_heal_per_cap: float = 0.0
+## > 0: after the LAST hit, if the target is below this HP fraction (a kill counts), the user
+## gains an Energized +1 (Onslaught: 0.3).
+@export var energize_if_target_below_hp_pct: float = 0.0

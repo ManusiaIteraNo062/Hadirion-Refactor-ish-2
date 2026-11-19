@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_w8x6d"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_ow0ft"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_bb540"]
+
+[sub_resource type="Resource" id="Resource_j2hym"]
+script = ExtResource("1_w8x6d")
+move_name = "Eruption"
+type = 1
+target_type = 1
+energy_cost = 3
+power = 25
+description = "Membuat ledakan rantai dari bawah tanah ke semua musuh."
+scaling_mult = 3.0
+scaling_stat = 2
+formula = "Damage = 25 + (Capability x 3) ke semua musuh."
+
+[resource]
+script = ExtResource("3_bb540")
+id = "d_eruption"
+owner_id = "dean"
+display_name = "Eruption"
+cost_text = "3 Energy"
+summary = "Membuat ledakan rantai dari bawah tanah ke semua musuh."
+formula = "Damage = 25 + (Capability x 3) ke semua musuh."
+moves = Array[ExtResource("1_w8x6d")]([SubResource("Resource_j2hym")])
+sort_order = 11

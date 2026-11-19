@@ -1,0 +1,69 @@
+[gd_scene format=3]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fttc"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.1, 0.1, 0.1, 0.85)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 0.85)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="MissionBoardLayout" type="Control" unique_id=719336063]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1160796594]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=1736154260]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5fttc")
+
+[node name="Column" type="VBoxContainer" parent="Center/Panel" unique_id=899296947]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="TitleLabel" type="Label" parent="Center/Panel/Column" unique_id=314424177]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "MISSION BOARD"
+horizontal_alignment = 1
+
+[node name="MissionScroll" type="ScrollContainer" parent="Center/Panel/Column" unique_id=1982051694]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 760)
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="MissionList" type="VBoxContainer" parent="Center/Panel/Column/MissionScroll" unique_id=195586345]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="FooterLabel" type="Label" parent="Center/Panel/Column" unique_id=257349396]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.7)
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="Center/Panel/Column" unique_id=176003165]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Back to Lobby"

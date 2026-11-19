@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="1_klq3h"]
+[ext_resource type="Script" path="res://scripts/data/item.gd" id="2_1q8te"]
+
+[resource]
+script = ExtResource("2_1q8te")
+id = "evvac_emk"
+sort_order = 3
+item_name = "EVVAC-EMK"
+category = "Heal Items"
+cost = 15
+heal_amount = 0
+heal_pct = 40.0
+description = "Memulihkan 40% HP."

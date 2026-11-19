@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equipment_item.gd" id="1_udsym"]
+
+[resource]
+script = ExtResource("1_udsym")
+id = "glazen_hart"
+sort_order = 5
+display_name = "A-Enh \"Glazen Hart\" by M.E.V"
+cost = 75
+bonus_health = 25
+bonus_capability = 10
+description = "Shangri-la Fragment yang dibentuk menjadi penguat Alteration"

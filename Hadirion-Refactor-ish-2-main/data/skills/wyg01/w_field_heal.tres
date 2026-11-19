@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_osoho"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_2teoi"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_xcof1"]
+
+[sub_resource type="Resource" id="Resource_s25if"]
+script = ExtResource("1_osoho")
+move_name = "Field Heal"
+type = 1
+target_type = 2
+energy_cost = 1
+power = 0
+is_heal = true
+description = "Melepaskan nanobot medis yang menyembuhkan satu anggota tim."
+scaling_mult = 0.0
+heal_pct_base = 20.0
+formula = "Pulih = 20% HP maksimal target."
+
+[resource]
+script = ExtResource("3_xcof1")
+id = "w_field_heal"
+owner_id = "wyg01"
+display_name = "Field Heal"
+cost_text = "1 Energy"
+summary = "Melepaskan nanobot medis yang menyembuhkan satu anggota tim."
+formula = "Pulih = 20% HP maksimal target."
+moves = Array[ExtResource("1_osoho")]([SubResource("Resource_s25if")])
+sort_order = 16

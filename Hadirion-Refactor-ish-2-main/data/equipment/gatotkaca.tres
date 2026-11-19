@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EquipmentItem" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equipment_item.gd" id="1_gk7xd"]
+
+[resource]
+script = ExtResource("1_gk7xd")
+id = "gatotkaca"
+sort_order = 2
+display_name = "Sepatu Enhancer \"Gatotkaca\""
+cost = 75
+bonus_health = 10
+bonus_strength = 10
+bonus_speed = -5
+description = "Sepatu khusus tentara dari MB.Inc"

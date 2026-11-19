@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Skill" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_tkp3y"]
+[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_hut4b"]
+[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_mkax3"]
+
+[sub_resource type="Resource" id="Resource_c8pm5"]
+script = ExtResource("1_tkp3y")
+move_name = "Onslaught"
+type = 1
+energy_cost = 2
+power = 13
+description = "Tiga cambukan rantai berturut-turut ke satu musuh."
+scaling_mult = 0.5
+hits = 3
+scaling_stat = 1
+formula = "Damage = 13 + (Strength / 2), sebanyak 3 kali. Jika HP target di bawah 30% setelah pukulan terakhir, Dean mendapat Energized."
+energize_if_target_below_hp_pct = 0.3
+
+[resource]
+script = ExtResource("3_mkax3")
+id = "d_onslaught"
+owner_id = "dean"
+display_name = "Onslaught"
+unlockable = true
+cost_text = "2 Energy"
+summary = "Tiga cambukan rantai berturut-turut ke satu musuh."
+formula = "Damage = 13 + (Strength / 2), sebanyak 3 kali. Jika HP target di bawah 30% setelah pukulan terakhir, Dean mendapat Energized."
+moves = Array[ExtResource("1_tkp3y")]([SubResource("Resource_c8pm5")])
+sort_order = 13

@@ -1,0 +1,217 @@
+[gd_scene format=3]
+
+[ext_resource type="FontFile" path="res://assets/fonts/Cinzel.ttf" id="1_wrtdj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8t3nb"]
+content_margin_left = 34.0
+content_margin_top = 6.0
+content_margin_right = 34.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.92)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_color = Color(0.88, 0.9, 0.93, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+
+[sub_resource type="FontVariation" id="FontVariation_aqpy5"]
+base_font = ExtResource("1_wrtdj")
+variation_embolden = 0.35
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u1js0"]
+content_margin_left = 22.0
+content_margin_top = 22.0
+content_margin_right = 22.0
+content_margin_bottom = 18.0
+bg_color = Color(0.1, 0.1, 0.1, 0.92)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.88, 0.9, 0.93, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhfh1"]
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+bg_color = Color(0.04, 0.26, 0.28, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.07, 0.4, 0.42, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gmc1"]
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+bg_color = Color(0.07, 0.4, 0.42, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.88, 0.9, 0.93, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dqjy0"]
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+bg_color = Color(0.07, 0.4, 0.42, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.38, 0.86, 0.82, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgv18"]
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+bg_color = Color(0.13, 0.58, 0.58, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.88, 0.9, 0.93, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hpwd7"]
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+bg_color = Color(0.07, 0.12, 0.13, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18, 0.28, 0.29, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ui20y"]
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+bg_color = Color(0.13, 0.58, 0.58, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.88, 0.9, 0.93, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="EncyclopediaScreenLayout" type="Control" unique_id=187892193]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Center" type="CenterContainer" parent="." unique_id=30433287]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Frame" type="VBoxContainer" parent="Center" unique_id=548404662]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SignRow" type="HBoxContainer" parent="Center/Frame" unique_id=1532876472]
+layout_mode = 2
+alignment = 1
+
+[node name="SignPanel" type="PanelContainer" parent="Center/Frame/SignRow" unique_id=1396806606]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8t3nb")
+
+[node name="SignLabel" type="Label" parent="Center/Frame/SignRow/SignPanel" unique_id=1010446811]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_aqpy5")
+theme_override_font_sizes/font_size = 22
+text = "ENCYCLOPEDIA"
+horizontal_alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="Center/Frame" unique_id=1998068916]
+custom_minimum_size = Vector2(820, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u1js0")
+
+[node name="Column" type="VBoxContainer" parent="Center/Frame/Panel" unique_id=1810105718]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="Center/Frame/Panel/Column" unique_id=355524902]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_aqpy5")
+theme_override_font_sizes/font_size = 24
+text = "MUSUH"
+horizontal_alignment = 1
+
+[node name="EnemyScroll" type="ScrollContainer" parent="Center/Frame/Panel/Column" unique_id=1785161478]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 700)
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="EnemyList" type="VBoxContainer" parent="Center/Frame/Panel/Column/EnemyScroll" unique_id=1723646357]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="NoteLabel" type="Label" parent="Center/Frame/Panel/Column" unique_id=2032117708]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.55)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="Center/Frame/Panel/Column" unique_id=1133849840]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 1, 0.98, 1)
+theme_override_colors/font_focus_color = Color(0.92, 1, 0.98, 1)
+theme_override_colors/font_pressed_color = Color(0.92, 1, 0.98, 1)
+theme_override_colors/font_hover_color = Color(0.92, 1, 0.98, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.92, 1, 0.98, 1)
+theme_override_colors/font_disabled_color = Color(0.55, 0.68, 0.68, 0.7)
+theme_override_styles/normal = SubResource("StyleBoxFlat_nhfh1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4gmc1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dqjy0")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_lgv18")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_hpwd7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ui20y")
+text = "Back to Lobby"
