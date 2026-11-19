@@ -1,8 +1,8 @@
 extends Control
 class_name MissionBoard
-## The mission select screen. A mission unlocks once the one before it has
-## been cleared. Cleared missions can be replayed (at a reduced reward).
-## The layout is in a scene file; this script fills it in.
+# The mission select screen. A mission unlocks once the one before it has
+# been cleared. Cleared missions can be replayed (at a reduced reward).
+# The layout is in a scene file; this script fills it in.
 
 signal mission_selected(mission: Mission)
 signal back_pressed
@@ -36,7 +36,7 @@ func _ready() -> void:
 	_fit_scroll()
 	get_viewport().size_changed.connect(_fit_scroll)
 
-## Waits one frame for the list to be laid out, then scrolls so the cursor is visible.
+# Waits one frame for the list to be laid out, then scrolls so the cursor is visible.
 func _scroll_to(btn: Control) -> void:
 	await get_tree().process_frame
 	if is_instance_valid(btn) and is_instance_valid(_scroll):

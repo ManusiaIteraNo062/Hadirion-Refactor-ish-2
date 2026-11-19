@@ -1,13 +1,8 @@
 extends RefCounted
 class_name TutorialPage
-## One page of a mission's tutorial (data/missions/NN_name/tutorial.txt).
-##
-##   - Pages are separated by a line with only  ---
-##   - The first line of a page is its title.
-##   - "> Device | explanation" makes a row: the device (button / key name,
-##     keep it in English) on a colored badge, the explanation (Indonesian) next to it.
-##   - Any other line is a paragraph.
-##   - Lines starting with # are comments.
+# One page of a mission tutorial (data/missions/NN_name/tutorial.txt).
+# Pages are split by a `---` line; the first line is the title; `> Device | text`
+# makes a badge row; other lines are paragraphs; `#` lines are comments.
 
 var title: String = ""
 var rows: Array = []                       # [ [device, explanation], ... ]

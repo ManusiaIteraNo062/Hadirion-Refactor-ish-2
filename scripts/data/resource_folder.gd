@@ -1,7 +1,7 @@
 extends RefCounted
 class_name ResourceFolder
-## Loads every .tres file inside a folder (and its subfolders).
-## ItemLibrary, SkillLibrary and Roster use this to read their data files.
+# Loads every .tres file inside a folder (and its subfolders).
+# ItemLibrary, SkillLibrary and Roster use this to read their data files.
 
 static func load_all(folder: String) -> Array[Resource]:
 	var found: Array[Resource] = []

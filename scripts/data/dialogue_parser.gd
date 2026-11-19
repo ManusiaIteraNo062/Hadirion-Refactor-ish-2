@@ -1,14 +1,10 @@
 extends RefCounted
 class_name DialogueParser
-## Turns a plain-text dialogue file into DialogueLine resources.
-##
-##   # comment (ignored), blank lines are ignored too
-##   Dean: You're the new hire.            <- speaker line (side/color from SpeakerTable)
-##   Helder [R]: Override the side.        <- optional [L] or [R]
-##   > Narration has no speaker.            <- narration starts with ">"
+# Turns a dialogue text file into DialogueLines: `Name: text`, `Name [R]: text`
+# (optional [L]/[R] side), `> narration`, `#` comments and blank lines ignored.
 
-## Longer lines are split at sentence ends into several consecutive lines
-## (same speaker) so they fit the dialogue box. Raise it if you make the box bigger.
+# Longer lines are split at sentence ends into several consecutive lines
+# (same speaker) so they fit the dialogue box. Raise it if you make the box bigger.
 const MAX_CHARS := 230
 
 static func parse(text: String) -> Array[DialogueLine]:
@@ -54,7 +50,7 @@ static func parse(text: String) -> Array[DialogueLine]:
 			out.append(dialogue_line)
 	return out
 
-## Greedy split after ". " / "! " / "? " / "... " boundaries, never mid-sentence.
+# Greedy split after ". " / "! " / "? " / "... " boundaries, never mid-sentence.
 static func _split_long(text: String) -> PackedStringArray:
 	if text.length() <= MAX_CHARS:
 		return PackedStringArray([text])

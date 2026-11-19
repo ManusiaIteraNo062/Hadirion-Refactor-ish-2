@@ -1,8 +1,8 @@
 extends Resource
 class_name Mission
-## One entry on the mission board. Lives in data/missions/<NN_name>/mission.tres;
-## the dialogue lines come from intro.txt / victory.txt / defeat.txt in the same
-## folder and are filled in by MissionLibrary when the game loads.
+# One entry on the mission board. Lives in data/missions/<NN_name>/mission.tres;
+# the dialogue lines come from intro.txt / victory.txt / defeat.txt in the same
+# folder and are filled in by MissionLibrary when the game loads.
 
 @export var id: StringName = &""
 @export var title: String = "Mission"
@@ -11,19 +11,19 @@ class_name Mission
 @export var chapter_label: String = ""  # e.g. "Level 1 - Prologue" (title card)
 @export var location: String = ""       # e.g. "TARAHAN, LAMPUNG" (title card + board)
 
-## Shangri-La Fragments for the FIRST clear. Replays pay a reduced share
-## (REPLAY_REWARD_RATIO in game_flow.gd).
+# Shangri-La Fragments for the FIRST clear. Replays pay a reduced share
+# (REPLAY_REWARD_RATIO in game_flow.gd).
 @export var fragment_reward: int = 20
 
-## Which characters take part (Roster ids, e.g. "helder", "radik"). Empty = everyone.
+# Which characters take part (Roster ids, e.g. "helder", "radik"). Empty = everyone.
 @export var party_ids: PackedStringArray = []
 
-## Optional picture behind the title card. Empty = a plain placeholder background.
-## (Or just drop a title_bg.png into the mission folder and it is picked up.)
+# Optional picture behind the title card. Empty = a plain placeholder background.
+# (Or just drop a title_bg.png into the mission folder and it is picked up.)
 @export var title_background: Texture2D
 
-## Enemy groups, in order. The GDD wants 2 / 3 / 1 waves for the three levels;
-## game_flow currently plays wave 0 only until multi-wave combat exists.
+# Enemy groups, in order. The GDD wants 2 / 3 / 1 waves for the three levels;
+# game_flow currently plays wave 0 only until multi-wave combat exists.
 @export var waves: Array[EnemyWave] = []
 
 # Filled by MissionLibrary from the .txt files (not edited in the inspector).
@@ -35,7 +35,7 @@ var tutorial_pages: Array[TutorialPage] = []  # shown at the start of the battle
 func wave_count() -> int:
 	return waves.size()
 
-## Fresh enemies (full HP, pattern reset) for one wave.
+# Fresh enemies (full HP, pattern reset) for one wave.
 func build_wave(index: int = 0) -> Array[BattleUnit]:
 	var team: Array[BattleUnit] = []
 	if index < 0 or index >= waves.size() or waves[index] == null:

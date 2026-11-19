@@ -1,10 +1,7 @@
 extends Resource
 class_name Weapon
-## A piece of equipment crafted with Shangri-La Fragments at Admin's
-## workshop. Each character has one base weapon (tier 0, free, always owned)
-## and upgrades that REPLACE it when equipped. Bonuses are simply added to
-## the character's CharacterStats when the party is built, so the combat code
-## never needs to know weapons exist (it only sees the final numbers).
+# A crafted piece of equipment. Bonuses are added to CharacterStats when the
+# party is built, so combat code only sees the final numbers.
 
 @export var id: String = ""
 @export var display_name: String = "Weapon"

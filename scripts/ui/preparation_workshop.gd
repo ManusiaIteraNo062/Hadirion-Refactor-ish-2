@@ -1,9 +1,9 @@
 extends Control
 class_name PreparationWorkshop
-## Workshop > Preparation: craft consumable items to carry into missions.
-## Grouped by category (each with its flavor text); price differs per item.
-## You can carry at most ItemLibrary.MAX_STACK of each. Items used in a won
-## mission stay used; after a loss nothing is spent.
+# Workshop > Preparation: craft consumable items to carry into missions.
+# Grouped by category (each with its flavor text); price differs per item.
+# You can carry at most ItemLibrary.MAX_STACK of each. Items used in a won
+# mission stay used; after a loss nothing is spent.
 
 signal back_pressed
 signal changed

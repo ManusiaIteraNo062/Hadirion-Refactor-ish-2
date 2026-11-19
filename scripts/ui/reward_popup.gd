@@ -1,8 +1,8 @@
 extends Control
 class_name RewardPopup
-## "Mission complete" panel showing the Shangri-La Fragments earned.
-## Usage: await reward_popup.show_rewards(title, amount, first_clear, total)
-## Put it inside the same CanvasLayer as the DialogueBox.
+# "Mission complete" panel showing the Shangri-La Fragments earned.
+# Usage: await reward_popup.show_rewards(title, amount, first_clear, total)
+# Put it inside the same CanvasLayer as the DialogueBox.
 
 signal _continued
 

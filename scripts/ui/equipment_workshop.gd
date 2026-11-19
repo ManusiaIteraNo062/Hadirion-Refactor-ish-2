@@ -1,11 +1,7 @@
 extends Control
 class_name EquipmentWorkshop
-## Workshop > Equipment. Three tabs, one character row, and the same
-## craft / equip / unequip buttons everywhere:
-##   Upgrades        - one active upgrade per character (stat bonuses)
-##   Equipment       - 5 slots per character, each character crafts their own copy
-##   Skill Knowledge - learn unlockable Alterations; shows what each skill does
-## Emits `changed` whenever the GameState was modified (so it can be saved).
+# Workshop > Equipment, in 3 tabs: Upgrades (one active per character), Equipment
+# (5 slots) and Skill Knowledge. Emits `changed` when the GameState was modified.
 
 signal back_pressed
 signal changed
@@ -86,7 +82,7 @@ func refresh(state: GameState) -> void:
 	_focus_row = 0
 	_rebuild()
 
-## Puts the cursor on the button of row `_focus_row` (or the nearest enabled one).
+# Puts the cursor on the button of row `_focus_row` (or the nearest enabled one).
 func focus_first() -> void:
 	var rows: Array[Node] = _list.get_children()
 	if rows.is_empty():

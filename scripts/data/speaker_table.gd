@@ -1,10 +1,10 @@
 extends RefCounted
 class_name SpeakerTable
-## Who is who in dialogue files: portrait color + default side.
-## A new character (or boss) = one new entry here, then just write
-## "Name: line" in the .txt files. Unknown names still work (grey, right side).
+# Who is who in dialogue files: portrait color + default side.
+# A new character (or boss) = one new entry here, then just write
+# "Name: line" in the .txt files. Unknown names still work (grey, right side).
 
-## "Admin (via Drone)" uses Admin's entry; the full text is still what is displayed.
+# "Admin (via Drone)" uses Admin's entry; the full text is still what is displayed.
 static func lookup(speaker: String) -> Dictionary:
 	speaker = _base_name(speaker)
 	var L := DialogueLine.Side.LEFT
@@ -18,8 +18,8 @@ static func lookup(speaker: String) -> Dictionary:
 	}
 	return table.get(speaker, {"color": Color(0.6, 0.6, 0.6), "side": R})
 
-## The picture for a speaker, or null. Just drop a PNG named after them into
-## res://assets/portraits/ (lowercase, spaces as _): helder.png, admin.png, wyg-01.png ...
+# The picture for a speaker, or null. Just drop a PNG named after them into
+# res://assets/portraits/ (lowercase, spaces as _): helder.png, admin.png, wyg-01.png ...
 static func portrait_for(speaker: String) -> Texture2D:
 	var file_name: String = _base_name(speaker).to_lower().replace(" ", "_")
 	var path: String = "res://assets/portraits/%s.png" % file_name
@@ -27,7 +27,7 @@ static func portrait_for(speaker: String) -> Texture2D:
 		return load(path) as Texture2D
 	return null
 
-## "Admin (via Drone)" -> "Admin"
+# "Admin (via Drone)" -> "Admin"
 static func _base_name(speaker: String) -> String:
 	var paren: int = speaker.find(" (")
 	if paren > 0:

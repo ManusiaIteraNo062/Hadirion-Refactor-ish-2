@@ -1,7 +1,7 @@
 extends Control
 class_name WorkshopIcon
-## Hand-drawn (code) hammer and sack icons for the workshop's two choices.
-## Replace _draw() with a TextureRect later if you get real icon art.
+# Hand-drawn (code) hammer and sack icons for the workshop's two choices.
+# Replace _draw() with a TextureRect later if you get real icon art.
 
 enum Kind { HAMMER, SACK }
 

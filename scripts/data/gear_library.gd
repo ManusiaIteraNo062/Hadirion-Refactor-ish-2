@@ -1,10 +1,7 @@
 extends RefCounted
 class_name GearLibrary
-## Everything craftable with Shangri-La Fragments, except skills (SkillLibrary).
-## Upgrades are .tres files in res://data/upgrades/<character>/ and equipment is
-## in res://data/equipment/ - open one in the editor to change its stats, cost
-## or text. (Prices were first set by a rule: upgrade 100; equipment 65 / 75 / 100
-## by how many stats it raises. Now each price is just a number in its file.)
+# Everything craftable with Shangri-La Fragments except skills (SkillLibrary):
+# upgrades in data/upgrades/<character>/ and equipment in data/equipment/.
 
 const SLOTS := 5            # equipment slots per character
 const UPGRADE_FOLDER := "res://data/upgrades"
@@ -26,7 +23,7 @@ static func get_upgrade(upgrade_id: String) -> Upgrade:
 			return u
 	return null
 
-## One character's entries: base (no upgrade) first, then by tier.
+# One character's entries: base (no upgrade) first, then by tier.
 static func upgrades_for(character_id: String) -> Array[Upgrade]:
 	var out: Array[Upgrade] = []
 	for u in upgrades():
@@ -35,7 +32,7 @@ static func upgrades_for(character_id: String) -> Array[Upgrade]:
 	out.sort_custom(_by_tier)
 	return out
 
-## The upgrade you must own before this one can be crafted (tier 2 needs tier 1), or null.
+# The upgrade you must own before this one can be crafted (tier 2 needs tier 1), or null.
 static func previous_upgrade(u: Upgrade) -> Upgrade:
 	if u.tier < 2:
 		return null

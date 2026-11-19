@@ -1,13 +1,13 @@
 extends Control
 class_name StatBar
-## A flat bar for HP (smooth) or Energy (segmented). Draws itself, so there are
-## no textures to import; swap _draw() for art later. `value` animates.
+# A flat bar for HP (smooth) or Energy (segmented). Draws itself, so there are
+# no textures to import; swap _draw() for art later. `value` animates.
 
 @export var max_value: float = 100.0
 @export var fill_color: Color = Color(0.85, 0.2, 0.2)
 @export var back_color: Color = Color(0.05, 0.05, 0.05, 0.9)
 @export var frame_color: Color = Color(0.55, 0.45, 0.2)
-## 0 = smooth bar. N > 0 = N equal segments (Energy: 5).
+# 0 = smooth bar. N > 0 = N equal segments (Energy: 5).
 @export var segments: int = 0
 
 var value: float = 0.0 : set = _set_value

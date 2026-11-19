@@ -1,9 +1,9 @@
 extends Control
 class_name LobbyScreen
-## The hub between missions: go to the mission board, spend fragments at
-## Admin's workshop, or (once unlocked) enter Training.
-## The layout (panel, buttons) is in scenes/ui/lobby_screen.tscn.
-## This script only connects the buttons and fills in the text.
+# The hub between missions: go to the mission board, spend fragments at
+# Admin's workshop, or (once unlocked) enter Training.
+# The layout (panel, buttons) is in scenes/ui/lobby_screen.tscn.
+# This script only connects the buttons and fills in the text.
 
 signal missions_pressed
 signal workshop_pressed

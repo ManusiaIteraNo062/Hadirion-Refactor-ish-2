@@ -1,12 +1,7 @@
 extends Control
 class_name TutorialBox
-## A paged "how to play" box shown over the battle (see TutorialPage for the
-## text format). Look: dark framed panel, title top-left in cyan, device badges
-## above, centered Indonesian text below.
-##
-##   await tutorial.play(pages)   # returns when the player closes it
-##
-## Space / Enter / click: next page.  Left / Right: change page.  Esc: skip.
+# Paged "how to play" box over the battle (see TutorialPage). Use: await tutorial.play(pages).
+# Space/Enter/click: next. Left/Right: change page. Esc: skip.
 
 signal finished
 
@@ -53,7 +48,7 @@ func _on_back_pressed() -> void:
 func _on_next_pressed() -> void:
 	_go(1)
 
-## Shows the pages and waits until the player finishes or skips.
+# Shows the pages and waits until the player finishes or skips.
 func play(pages: Array[TutorialPage]) -> void:
 	if pages.is_empty():
 		return
@@ -95,7 +90,7 @@ func _show_page() -> void:
 		_body.add_child(l)
 	_next_btn.grab_focus()
 
-## A colored device badge (button / key, in English) with its explanation beside it.
+# A colored device badge (button / key, in English) with its explanation beside it.
 func _make_row(device: String, text: String) -> Control:
 	# the row layout is in scenes/ui/tutorial_row.tscn
 	var row: HBoxContainer = ROW_SCENE.instantiate()

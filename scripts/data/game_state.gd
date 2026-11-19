@@ -1,18 +1,13 @@
 extends RefCounted
 class_name GameState
-## Everything that must survive between missions (and between play
-## sessions): fragments, cleared missions, upgrades, equipment, learned skills.
-## Saved to user://hadirion_save.json after every change that matters.
-## To reset progress while testing, call GameState.delete_save() (or delete
-## that file from Godot's user data folder: Project > Open User Data Folder).
-##
-## Old saves keep working: fields that don't exist yet just load as empty.
+# Everything kept between missions and sessions (fragments, cleared missions, gear, skills),
+# saved to user://hadirion_save.json after each change. Missing fields in old saves load empty.
 
 const SAVE_PATH := "user://hadirion_save.json"
 const SAVE_VERSION := 2
 const FINAL_MISSION_ID := "suara_merdu" # clearing this unlocks Training
 
-## Where this state is saved (tests point it at a temp file).
+# Where this state is saved (tests point it at a temp file).
 var save_path: String = SAVE_PATH
 
 var fragments: int = 0
@@ -61,12 +56,12 @@ func upgrade_for(character_id: String) -> Upgrade:
 			u = GearLibrary.get_upgrade(def.base_upgrade_id)
 	return u
 
-## Tier 1 is open from the start; tier 2 needs tier 1 to be owned first.
+# Tier 1 is open from the start; tier 2 needs tier 1 to be owned first.
 func upgrade_unlocked(u: Upgrade) -> bool:
 	var need := GearLibrary.previous_upgrade(u)
 	return need == null or owns(need.id)
 
-## Spends fragments, adds the upgrade, and equips it (it replaces the old one).
+# Spends fragments, adds the upgrade, and equips it (it replaces the old one).
 func buy_upgrade(u: Upgrade) -> bool:
 	if owns(u.id) or not upgrade_unlocked(u) or not can_afford(u.cost):
 		return false
@@ -100,8 +95,8 @@ func gear_slots_used(character_id: String) -> int:
 func has_free_slot(character_id: String) -> bool:
 	return gear_slots_used(character_id) < GearLibrary.SLOTS
 
-## Crafts one copy for this character (50 Fragments, one of each, no stacking).
-## It is worn immediately if a slot is free.
+# Crafts one copy for this character (50 Fragments, one of each, no stacking).
+# It is worn immediately if a slot is free.
 func buy_gear(character_id: String, item: EquipmentItem) -> bool:
 	if owns_gear(character_id, item.id) or not can_afford(item.cost):
 		return false
@@ -150,7 +145,7 @@ func learn_skill(skill: Skill) -> bool:
 func has_met(enemy_id: String) -> bool:
 	return enemies_seen.has(enemy_id)
 
-## Returns true the first time this enemy is seen.
+# Returns true the first time this enemy is seen.
 func mark_enemy_seen(enemy_id: String) -> bool:
 	if enemy_id == "" or enemies_seen.has(enemy_id):
 		return false
@@ -165,7 +160,7 @@ func item_count(item_id: String) -> int:
 func can_carry_more(item_id: String) -> bool:
 	return item_count(item_id) < ItemLibrary.MAX_STACK
 
-## Crafts one item (price depends on the item). Stops at ItemLibrary.MAX_STACK.
+# Crafts one item (price depends on the item). Stops at ItemLibrary.MAX_STACK.
 func buy_item(item: Item) -> bool:
 	if not can_carry_more(item.id) or not can_afford(item.cost):
 		return false
@@ -175,9 +170,9 @@ func buy_item(item: Item) -> bool:
 
 # ---- final stats ----------------------------------------------------------
 
-## Base stats + active upgrade + worn equipment, as a Dictionary:
-## { health, attack (= Strength), capability, speed }. Speed can't go below 0
-## and HP can't go below 1.
+# Base stats + active upgrade + worn equipment, as a Dictionary:
+# { health, attack (= Strength), capability, speed }. Speed can't go below 0
+# and HP can't go below 1.
 func stats_for(character_id: String) -> Dictionary:
 	var d = Roster.get_def(character_id)
 	var hp: int = d.health
@@ -199,7 +194,7 @@ func stats_for(character_id: String) -> Dictionary:
 			spd += e.bonus_speed
 	return {"health": maxi(1, hp), "attack": atk, "capability": cap, "speed": maxi(0, spd)}
 
-## Every character always owns and (by default) wields their base entry.
+# Every character always owns and (by default) wields their base entry.
 func ensure_defaults() -> void:
 	for d in Roster.all():
 		owned[d.base_upgrade_id] = true

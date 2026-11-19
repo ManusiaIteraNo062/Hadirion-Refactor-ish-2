@@ -1,14 +1,7 @@
 extends CanvasLayer
 class_name ScreenFader
-## Black fade overlay + title card, drawn above everything (layer 20).
-## Used for every transition: menu <-> menu, menu -> cutscene,
-## cutscene -> battle, battle -> cutscene.
-##
-##   await fader.fade_out()                 # screen goes black
-##   await fader.title_card("Title", "sub") # shown while black
-##   await fader.fade_in()                  # reveal
-##
-## While the screen is (becoming) black, mouse input is blocked.
+# Black fade overlay + title card above everything (layer 20), blocks mouse while black.
+# Use: await fader.fade_out(); await fader.title_card("Title", "sub"); await fader.fade_in()
 
 var _rect: ColorRect
 var _card: Control            # the whole title card (background + text), faded as one
@@ -86,7 +79,7 @@ func _fade_to(alpha: float, duration: float) -> void:
 	_tween.tween_property(_rect, "color:a", alpha, duration)
 	await _tween.finished
 
-## Call while the screen is black. Fades the text in, holds, fades it out.
+# Call while the screen is black. Fades the text in, holds, fades it out.
 func title_card(title: String, subtitle: String = "", hold: float = 1.6, background: Texture2D = null) -> void:
 	_card_bg.texture = background if background != null else _placeholder_bg
 	_title.text = title

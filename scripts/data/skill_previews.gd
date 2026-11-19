@@ -1,8 +1,8 @@
 extends RefCounted
 class_name SkillPreviews
-## The "Saat ini: ..." line under a skill in the workshop (it uses the
-## character's current stats). Most skills just show their damage. A few need
-## their own wording, and a few show nothing - those are listed here.
+# The "Saat ini: ..." line under a skill in the workshop (it uses the
+# character's current stats). Most skills just show their damage. A few need
+# their own wording, and a few show nothing - those are listed here.
 
 # Skills that show no "Saat ini" line at all.
 const NO_PREVIEW := ["r_heroik", "d_overcome", "w_field_heal", "w_booster"]

@@ -1,32 +1,19 @@
 extends Control
 class_name BattleUI
-## Battle screen UI, built in code, laid out from the user's sketches:
-##
-##   top-left   TURN panel, WAVE panel, "name used" strip
-##   top-right  enemy list (name, HP bar, HP number; boss last)
-##   bottom     "<name>'s turn"  ->  party status bar (HP + segmented EP)
-##              ->  action panel: [categories] [moves/items] [Target who]
-##
-## Everything is anchored (top-left / top-right / bottom-center), so wider
-## windows just get more empty space on the sides. The battlefield itself is
-## placed by BattleStage. Keyboard: arrows move, Space/Enter accepts, Esc or
-## right-click goes back one step.
+# Battle screen UI, built in code and anchored to the screen edges: turn/wave panels
+# and enemy list on top, party bar and action panel at the bottom.
+# Keys: arrows move, Space/Enter accepts, Esc or right-click goes back.
 
 signal target_focused(units: Array) # units about to be targeted (empty = none); BattleStage shows markers
 
 @export var battle_manager: BattleManager
-## false = the caller starts the battle with begin() (used to show a tutorial first).
+# false = the caller starts the battle with begin() (used to show a tutorial first).
 @export var autostart: bool = true
 
 # --- look ---
-const BAR_WIDTH := 820.0        # party status bar and action panel width
-const PARTY_BAR_HEIGHT := 70.0
-const ACTION_HEIGHT := 126.0
-const MARGIN := 16.0
 const GOLD := Color(0.88, 0.7, 0.3)
 const GOLD_DIM := Color(0.42, 0.34, 0.17)
 const PANEL_BG := Color(0.09, 0.08, 0.07, 0.94)
-const TEXT_DARK := Color(0.1, 0.08, 0.03)
 
 # --- widgets ---
 var _turn_value: Label
@@ -143,7 +130,7 @@ func _on_exit_training_pressed() -> void:
 func _on_round_started(round_number: int) -> void:
 	_turn_value.text = str(round_number)
 
-## Starts the battle (only needed when autostart is off).
+# Starts the battle (only needed when autostart is off).
 func begin() -> void:
 	battle_manager.start_battle()
 
@@ -275,7 +262,7 @@ func _on_wave_started(units: Array) -> void:
 func _update_wave() -> void:
 	_wave_value.text = "%d/%d" % [battle_manager.current_wave, battle_manager.wave_count]
 
-## Refreshes one unit's bars and text (party cell or enemy row).
+# Refreshes one unit's bars and text (party cell or enemy row).
 func _update_unit(u: BattleUnit, animate: bool = true) -> void:
 	if _party_cells.has(u):
 		var c: Dictionary = _party_cells[u]
@@ -333,7 +320,7 @@ func _update_status_box(c: Dictionary, u: BattleUnit) -> void:
 	elif c["popup"].visible:
 		_position_popup(u)
 
-## Highlights the acting unit's cell and shows "<name>'s turn" right above it.
+# Highlights the acting unit's cell and shows "<name>'s turn" right above it.
 func _highlight_active(unit: BattleUnit) -> void:
 	for u in _party_cells:
 		_party_cells[u]["panel"].add_theme_stylebox_override("panel", _cell_style(u == unit))
@@ -383,14 +370,18 @@ func _on_player_turn(unit: BattleUnit, actions: Dictionary) -> void:
 
 func _clear_actions() -> void:
 	_on_cancel = Callable()
+	_reset_middle()
+	_hint.visible = false
+	for b in _category_buttons.values():
+		b.disabled = true
+
+# Empties the move / target panels and clears the target highlight.
+func _reset_middle() -> void:
 	_picking_target = false
 	_hide_info()
 	_clear_children(_move_list)
 	_clear_children(_target_grid)
 	_target_title.text = ""
-	_hint.visible = false
-	for b in _category_buttons.values():
-		b.disabled = true
 	target_focused.emit([])
 
 func _clear_children(node: Node) -> void:
@@ -398,15 +389,10 @@ func _clear_children(node: Node) -> void:
 		node.remove_child(c)
 		c.queue_free()
 
-## Back to the category list (start of every turn, and Esc from the move list).
+# Back to the category list (start of every turn, and Esc from the move list).
 func _show_categories() -> void:
-	_picking_target = false
-	_hide_info()
-	_clear_children(_move_list)
-	_clear_children(_target_grid)
-	_target_title.text = ""
+	_reset_middle()
 	_hint.visible = false
-	target_focused.emit([])
 	_on_cancel = Callable()
 	for b in _category_buttons.values():
 		b.disabled = false
@@ -418,17 +404,12 @@ func _show_categories() -> void:
 	else:
 		first.grab_focus() # focus_entered fills the middle panel
 
-## Fills the middle panel for a category (called when its button gets focus).
+# Fills the middle panel for a category (called when its button gets focus).
 func _show_category(kind: String) -> void:
 	if _current_unit == null:
 		return
 	_kind = kind
-	_picking_target = false
-	_hide_info()
-	_clear_children(_move_list)
-	_clear_children(_target_grid)
-	_target_title.text = ""
-	target_focused.emit([])
+	_reset_middle()
 	if kind == "basic":
 		for move in _current_actions["basic"]:
 			_add_entry(move.move_name, _select_targets.bind("basic", move, null), true, move.move_name, _move_info(move))
@@ -472,7 +453,7 @@ func _on_category_pressed(kind: String) -> void:
 		btn.grab_focus()
 		_hint.visible = true
 
-## info_title / info_body: what the right-hand box shows while this entry is hovered or focused.
+# info_title / info_body: what the right-hand box shows while this entry is hovered or focused.
 func _add_entry(text: String, callback: Callable, enabled: bool = true, info_title: String = "", info_body: String = "") -> void:
 	var btn: Button = _make_gold_button(text)
 	btn.disabled = not enabled
@@ -496,7 +477,7 @@ func _hide_info() -> void:
 	_info_scroll.visible = false
 	_target_grid.visible = true
 
-## Live numbers for a move, from the unit's current (buffed) stats.
+# Live numbers for a move, from the unit's current (buffed) stats.
 func _unit_stats() -> Dictionary:
 	return {"attack": _current_unit.get_attack(), "capability": _current_unit.get_capability(), "speed": _current_unit.get_speed()}
 
@@ -516,7 +497,7 @@ func _move_info(move: Move) -> String:
 		t += "\n" + live
 	return t
 
-## Target step: one button per candidate in a 2-column grid (like the field).
+# Target step: one button per candidate in a 2-column grid (like the field).
 func _select_targets(kind: String, move: Move, item: Item) -> void:
 	var candidates: Array = []
 	var target_all: bool = false
@@ -601,7 +582,7 @@ func _first_button(root: Node) -> Button:
 			return c
 	return null
 
-## Esc / right-click = back one step.
+# Esc / right-click = back one step.
 func _unhandled_input(event: InputEvent) -> void:
 	var back: bool = event.is_action_pressed("ui_cancel")
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
@@ -635,8 +616,8 @@ func _gold_normal_style() -> StyleBoxFlat:
 func _gold_picked_style() -> StyleBoxFlat:
 	return _flat(Color(0.9, 0.7, 0.15), Color(1.0, 0.92, 0.5), 2, 6)
 
-## Move / target button: outlined, turns solid gold when selected.
-## (its look is in scenes/ui/gold_button.tscn)
+# Move / target button: outlined, turns solid gold when selected.
+# (its look is in scenes/ui/gold_button.tscn)
 func _make_gold_button(text: String) -> Button:
 	var b: Button = GOLD_BUTTON_SCENE.instantiate()
 	b.text = text

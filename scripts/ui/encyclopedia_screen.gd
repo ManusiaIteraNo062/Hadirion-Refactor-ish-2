@@ -1,8 +1,8 @@
 extends Control
 class_name EncyclopediaScreen
-## Lobby > Enemy Encyclopedia. Same look as the workshop's item list:
-## a scrolling list of cards, one per enemy. Name and HP are in a bigger font
-## than the move lines. Bosses only show up after you have met them.
+# Lobby > Enemy Encyclopedia. Same look as the workshop's item list:
+# a scrolling list of cards, one per enemy. Name and HP are in a bigger font
+# than the move lines. Bosses only show up after you have met them.
 
 signal back_pressed
 
@@ -78,7 +78,7 @@ func _make_card(e: EnemyType) -> Control:
 		column.add_child(rich)
 	return card
 
-## "[color=gold]Slosh[/color] : ..." (the line is escaped so descriptions can't break the markup).
+# "[color=gold]Slosh[/color] : ..." (the line is escaped so descriptions can't break the markup).
 func _move_bbcode(m: Move) -> String:
 	var line: String = EnemyLibrary.move_line(m).replace("[", "[lb]")
 	var colon: int = line.find(" : ")

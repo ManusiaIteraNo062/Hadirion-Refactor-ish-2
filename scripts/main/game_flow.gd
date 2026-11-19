@@ -1,21 +1,7 @@
 extends Node
-## Attach this to the root Node of scenes/main.tscn (the game's main scene).
-##
-## Whole-game flow:
-##
-##   Lobby <-> Mission Board / Admin's Workshop / Training
-##
-##   Mission picked:
-##     fade out -> title card -> fade in -> PRE-BATTLE dialogue
-##     -> fade out -> battle (fade in) -> fade out
-##     -> POST-BATTLE dialogue (victory or defeat)
-##     -> win only: reward popup (Shangri-La Fragments, saved)
-##     -> fade out -> Lobby
-##
-## Winning marks the mission cleared (unlocking the next one), pays
-## fragments (full on first clear, REPLAY_REWARD_RATIO on replays) and saves.
-## Every battle attempt starts fresh: party at full HP, new enemies, new
-## item stock. Equipped weapons are baked into the party's stats.
+# Main scene script: lobby <-> missions/workshop, and the mission loop
+# (story, battle, story, reward, back to lobby). Winning clears the mission,
+# pays fragments (less on replays) and saves. Every attempt starts fresh.
 
 signal _battle_finished
 
@@ -25,7 +11,7 @@ var _state: GameState
 var _missions: Array[Mission] = []
 var _busy: bool = false # blocks input while a transition/sequence runs
 
-## Where the save lives. Tests point this at a temp file; leave it alone otherwise.
+# Where the save lives. Tests point this at a temp file; leave it alone otherwise.
 var save_path: String = GameState.SAVE_PATH
 
 var _tutorial: TutorialBox
@@ -111,7 +97,7 @@ func _switch_to(screen) -> void:
 	await _fader.fade_in(0.25)
 	_busy = false
 
-## Title > Continue: straight to the lobby with the saved progress.
+# Title > Continue: straight to the lobby with the saved progress.
 func _on_continue() -> void:
 	if _busy:
 		return
@@ -119,8 +105,8 @@ func _on_continue() -> void:
 	await _switch_to(_lobby)
 	await _play_lobby_story()
 
-## Title > New Game (already confirmed): wipe the save, start from zero, and
-## go straight into the first mission. Afterwards the lobby plays its intro.
+# Title > New Game (already confirmed): wipe the save, start from zero, and
+# go straight into the first mission. Afterwards the lobby plays its intro.
 func _on_new_game() -> void:
 	if _busy or _missions.is_empty():
 		return
@@ -140,8 +126,8 @@ func _play_lobby_story() -> void:
 	_state.save()
 	_busy = false
 
-## Training: the normal battle screen against two dummies, with the energy bar
-## always full. No story, no rewards, and items used are not spent.
+# Training: the normal battle screen against two dummies, with the energy bar
+# always full. No story, no rewards, and items used are not spent.
 func _on_training_pressed() -> void:
 	if _busy:
 		return
@@ -154,7 +140,7 @@ func _on_training_pressed() -> void:
 	await _fader.fade_in(0.4)
 	_busy = false
 
-## Two Training Dummies (data/enemies/training_dummy.tres) in one wave.
+# Two Training Dummies (data/enemies/training_dummy.tres) in one wave.
 func _make_training_mission() -> Mission:
 	var dummy: EnemyType = load("res://data/enemies/training_dummy.tres")
 	var wave := EnemyWave.new()
@@ -220,8 +206,8 @@ func _give_rewards(mission: Mission) -> void:
 		return # story-only mission: nothing to show
 	await _rewards.show_rewards(mission.title, amount, first_clear, _state.fragments)
 
-## Builds a fresh battle under the black screen, reveals it, waits for the
-## result, fades out, tears it down. Returns true if the player won.
+# Builds a fresh battle under the black screen, reveals it, waits for the
+# result, fades out, tears it down. Returns true if the player won.
 func _run_battle(mission: Mission, training: bool = false) -> bool:
 	_battle_root = Node.new()
 	_battle_root.name = "Battle"
@@ -285,15 +271,15 @@ func _run_battle(mission: Mission, training: bool = false) -> bool:
 	_battle_root = null
 	return _battle_won
 
-## Items crafted in the workshop go into the battle.
+# Items crafted in the workshop go into the battle.
 func _load_inventory(bm: BattleManager) -> void:
 	for item in ItemLibrary.all():
 		var n := _state.item_count(item.id)
 		if n > 0:
 			bm.add_item(item, n)
 
-## After a WIN, whatever was used stays used. After a loss nothing is spent,
-## so the player can retry with the same supplies.
+# After a WIN, whatever was used stays used. After a loss nothing is spent,
+# so the player can retry with the same supplies.
 func _save_inventory(bm: BattleManager) -> void:
 	for item in ItemLibrary.all():
 		_state.inventory[item.id] = clampi(int(bm.party_inventory.get(item, 0)), 0, ItemLibrary.MAX_STACK)

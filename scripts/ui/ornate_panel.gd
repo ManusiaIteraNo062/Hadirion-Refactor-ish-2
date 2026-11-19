@@ -1,7 +1,7 @@
 extends PanelContainer
 class_name OrnatePanel
-## The shared "dark panel with gold corner brackets" look from the UI sketches.
-## Any container content goes inside as normal children.
+# The shared "dark panel with gold corner brackets" look from the UI sketches.
+# Any container content goes inside as normal children.
 
 @export var accent: Color = Color(0.88, 0.7, 0.3) : set = _set_accent
 @export var corner_length: float = 12.0

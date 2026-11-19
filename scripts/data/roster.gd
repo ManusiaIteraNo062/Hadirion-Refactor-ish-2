@@ -1,9 +1,9 @@
 extends RefCounted
 class_name Roster
-## The four playable characters. Their base numbers are .tres files in
-## res://data/characters/ - open one in the editor to change them.
-## Upgrade + equipment bonuses (GearLibrary) are added on top when the team is
-## built; skills come from SkillLibrary.
+# The four playable characters. Their base numbers are .tres files in
+# res://data/characters/ - open one in the editor to change them.
+# Upgrade + equipment bonuses (GearLibrary) are added on top when the team is
+# built; skills come from SkillLibrary.
 
 const HELDER_COLOR := Color(0.3, 0.75, 0.8)
 const RADIK_COLOR := Color(0.95, 0.6, 0.25)
@@ -14,7 +14,7 @@ const CHARACTER_FOLDER := "res://data/characters"
 
 static var _all: Array = []
 
-## Returns an Array of CharacterTemplate, in party order.
+# Returns an Array of CharacterTemplate, in party order.
 static func all() -> Array:
 	if _all.is_empty():
 		_load()

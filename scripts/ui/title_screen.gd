@@ -1,17 +1,13 @@
 extends Control
 class_name TitleScreen
-## The first screen: Continue / New Game / Quit.
-##   Continue  - needs a save; goes to the lobby with your progress.
-##   New Game  - asks first if a save exists (it is deleted), then the first
-##               mission starts straight away (see GameFlow).
-## The layout (buttons, labels, colors) is in scenes/ui/title_screen.tscn.
-## This script only fills in the text and reacts to the buttons.
+# First screen: Continue (needs a save) / New Game (asks first if a save exists) / Quit.
+# Layout is in title_screen.tscn; this script fills text and reacts to buttons.
 
 signal continue_pressed
 signal new_game_pressed   # already confirmed
 signal quit_pressed
 
-## Set by GameFlow so the summary can say "5 / 13 missions".
+# Set by GameFlow so the summary can say "5 / 13 missions".
 var total_missions: int = 0
 
 # The layout scene is loaded once, and a copy is made for every TitleScreen.

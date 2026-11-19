@@ -1,10 +1,7 @@
 extends RefCounted
 class_name EnemyLibrary
-## The list behind the Enemy Encyclopedia. Every EnemyType file in
-## data/enemies/ shows up automatically (training dummies don't). Regular enemies
-## are always listed; a boss appears only after it has been met in a battle.
-## Each enemy move is described by its `description` in the .tres plus an
-## auto-built effect list ("5 damage, +1 Gloop").
+# The list behind the Enemy Encyclopedia: every EnemyType in data/enemies/
+# (not training dummies); a boss shows only after it has been met in battle.
 
 const DIR := "res://data/enemies"
 
@@ -37,7 +34,7 @@ static func _load() -> void:
 		return a.display_name < b.display_name)
 	_all = found
 
-## One enemy type by its file name ("sloppy_altered"), or null. Includes training dummies.
+# One enemy type by its file name ("sloppy_altered"), or null. Includes training dummies.
 static func type_for_id(enemy_id: String) -> EnemyType:
 	if enemy_id == "":
 		return null
@@ -53,7 +50,7 @@ static func visible_for(state: GameState) -> Array[EnemyType]:
 			out.append(e)
 	return out
 
-## "Slosh : Memukul satu target dengan lumpur lengket (5 damage, +1 Gloop)"
+# "Slosh : Memukul satu target dengan lumpur lengket (5 damage, +1 Gloop)"
 static func move_line(move: Move) -> String:
 	var parts: PackedStringArray = []
 	if move.deals_damage and move.power > 0:

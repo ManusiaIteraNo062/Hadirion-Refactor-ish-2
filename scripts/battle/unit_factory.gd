@@ -1,7 +1,7 @@
 extends RefCounted
 class_name UnitFactory
-## Code-built units and moves, so every mission
-## (and later, real .tres data) can share them.
+# Code-built units and moves, so every mission
+# (and later, real .tres data) can share them.
 
 static func make_unit(unit_name: String, health: int, attack: int, capability: int, speed: int) -> BattleUnit:
 	var stats := CharacterStats.new()
@@ -26,17 +26,8 @@ static func make_unit(unit_name: String, health: int, attack: int, capability: i
 
 	return unit
 
-static func add_alteration(unit: BattleUnit, move_name: String, cost: int, power: int, target: Move.Target) -> void:
-	var move := Move.new()
-	move.move_name = move_name
-	move.type = Move.Type.ALTERATION
-	move.energy_cost = cost
-	move.power = power
-	move.target_type = target
-	unit.alteration_moves.append(move)
-
-## type = physical (BASIC, scales off Attack) or magical (ALTERATION, scales
-## off Capability). For enemies it has nothing to do with energy.
+# type = physical (BASIC, scales off Attack) or magical (ALTERATION, scales
+# off Capability). For enemies it has nothing to do with energy.
 static func make_enemy_move(move_name: String, power: int, target: Move.Target, type: Move.Type = Move.Type.BASIC) -> Move:
 	var move := Move.new()
 	move.move_name = move_name
@@ -50,18 +41,18 @@ static func make_moveset(moves: Array[Move]) -> EnemyMoveset:
 	ms.moves = moves
 	return ms
 
-## A pattern-based enemy: no basic moves, just a repeating moveset.
+# A pattern-based enemy: no basic moves, just a repeating moveset.
 static func make_enemy(unit_name: String, health: int, attack: int, capability: int, speed: int, moves: Array[Move]) -> BattleUnit:
 	var unit := make_unit(unit_name, health, attack, capability, speed)
 	unit.basic_moves.clear()
 	unit.moveset = make_moveset(moves)
 	return unit
 
-## Builds the party from the Roster: stats include the active upgrade and the
-## worn equipment (GameState.stats_for), and the Alteration list is the
-## character's known skills (base skills + any learned in the workshop).
-## (GameState.load_or_new() guarantees valid equipment.)
-## `only` = Roster ids that take part (empty = the whole party).
+# Builds the party from the Roster: stats include the active upgrade and the
+# worn equipment (GameState.stats_for), and the Alteration list is the
+# character's known skills (base skills + any learned in the workshop).
+# (GameState.load_or_new() guarantees valid equipment.)
+# `only` = Roster ids that take part (empty = the whole party).
 static func make_player_team(state: GameState, only: PackedStringArray = PackedStringArray()) -> Array[BattleUnit]:
 	var team: Array[BattleUnit] = []
 	for d in Roster.all():

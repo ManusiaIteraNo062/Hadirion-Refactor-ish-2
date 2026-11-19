@@ -1,9 +1,9 @@
 extends Resource
 class_name DialogueLine
-## One line of dialogue. The portrait is a colored placeholder box with the
-## speaker's first letter until you assign a real `portrait` texture.
-## Swapping in art later = set `portrait` on the line; nothing else changes.
-## Leave `speaker` empty for narration (no portrait, no name).
+# One line of dialogue. The portrait is a colored placeholder box with the
+# speaker's first letter until you assign a real `portrait` texture.
+# Swapping in art later = set `portrait` on the line; nothing else changes.
+# Leave `speaker` empty for narration (no portrait, no name).
 
 enum Side { LEFT, RIGHT }
 

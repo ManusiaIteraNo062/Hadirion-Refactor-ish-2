@@ -1,10 +1,7 @@
 extends Control
 class_name WorkshopScreen
-## Admin's workshop, the entry point from the lobby. Shows two big choices:
-##   left  - Equipment   (hammer): upgrades, equipment, skills  -> EquipmentWorkshop
-##   right - Preparation (sack):   craft items for missions     -> PreparationWorkshop
-## Each sub-screen has its own Back button (and Esc) that returns here.
-## Same outside API as before: refresh(state), focus_first(), changed, back_pressed.
+# Admin's workshop, the lobby entry: Equipment (EquipmentWorkshop) or
+# Preparation (PreparationWorkshop). Each has its own Back button (and Esc).
 
 signal back_pressed
 signal changed
@@ -93,7 +90,7 @@ func _show(view: View) -> void:
 	if is_inside_tree() and visible:
 		focus_first.call_deferred()
 
-## Esc: back one step (sub-screen -> hub -> lobby).
+# Esc: back one step (sub-screen -> hub -> lobby).
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible or not event.is_action_pressed("ui_cancel"):
 		return

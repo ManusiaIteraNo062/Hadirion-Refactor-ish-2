@@ -1,12 +1,12 @@
 extends RefCounted
 class_name ItemLibrary
-## Every craftable consumable (workshop > Preparation). Prices are Shangri-La
-## Fragments. Each item is a .tres file in res://data/items/ - open it in the
-## editor to change its numbers or Indonesian text.
+# Every craftable consumable (workshop > Preparation). Prices are Shangri-La
+# Fragments. Each item is a .tres file in res://data/items/ - open it in the
+# editor to change its numbers or Indonesian text.
 
 const MAX_STACK := 9 # most of one item you can carry
 
-## Category flavor texts (shown above each group in the workshop).
+# Category flavor texts (shown above each group in the workshop).
 const CATEGORY_FLAVOR := {
 	"Revive Items": "Barang yang membantu agen lapangan kembali berdiri",
 	"Heal Items": "Penanganan pertama mutakhir untuk kecelakaan dan luka",

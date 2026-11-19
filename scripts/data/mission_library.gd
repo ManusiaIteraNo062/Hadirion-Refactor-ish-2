@@ -1,19 +1,8 @@
 extends RefCounted
 class_name MissionLibrary
-## Loads every mission from res://data/missions/. One folder per mission:
-##
-##   data/missions/01_permulaan_baru/
-##     mission.tres    title, location, reward, waves of enemies
-##     intro.txt       dialogue before the battle
-##     victory.txt     dialogue after a win
-##     defeat.txt      dialogue after a loss (optional; falls back to data/defeat_default.txt)
-##
-## Folder names are sorted alphabetically = board order, so number them
-## (01_, 02_, ... 10_). Adding a mission = adding a folder. No code changes.
-## Dialogue format: see DialogueParser. Lobby text: data/lobby/intro.txt.
-##
-## EXPORT NOTE: add "*.txt" to Project > Export > Resources > "Filters to
-## export non-resource files" or the dialogue files won't ship in the build.
+# Loads missions from res://data/missions/<NN_name>/ (mission.tres, intro.txt,
+# victory.txt, optional defeat.txt). Folder name order = board order; a new
+# mission is just a new folder. Export: add "*.txt" to the export filters.
 
 const MISSIONS_DIR := "res://data/missions"
 const LOBBY_INTRO := "res://data/lobby/intro.txt"
@@ -51,7 +40,7 @@ static func _load_mission(dir: String) -> Mission:
 		m.defeat_lines = DialogueParser.load_file(DEFEAT_DEFAULT)
 	return m
 
-## Lobby dialogue played on entering the lobby (first visit only for now).
+# Lobby dialogue played on entering the lobby (first visit only for now).
 static func lobby_visit_lines(state: GameState) -> Array[DialogueLine]:
 	if not state.seen_lobby_intro:
 		return DialogueParser.load_file(LOBBY_INTRO)

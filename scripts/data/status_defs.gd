@@ -1,15 +1,8 @@
 extends RefCounted
 class_name StatusDefs
-## The rulebook for every status effect. Tuning a status = editing _build().
-##
-## Timing rules (all "turns" are the AFFECTED unit's own turns):
-##   * Damage-over-time and duration countdown happen at the END of that
-##     unit's turn. Duration 1 = "expires at turn end".
-##   * Stun does not count down at turn end; it is used up when the unit
-##     loses a turn (see BattleUnit.consume_stun).
-##   * Buffs a unit gives itself during its own turn skip that turn's end tick
-##     (grace), so "grants X next turn" really lasts through the next round.
-##   * PERMANENT (-1) lasts the whole fight.
+# The rulebook for every status effect; tune a status in _build().
+# DoT and countdown tick at the end of the AFFECTED unit's turn; Stun is used up
+# when the unit loses a turn; self-buffs skip their first end tick; PERMANENT (-1) lasts the fight.
 
 enum Kind { FIRE, POISON, STUN, GLOOP, SAPPED, STRENGTHEN, TIME_DILATION, FLAME_WINGS, ENERGIZED, SWIFT, INJ_CQB, INJ_ACB,
 	VERLICHTING, SAKEPENG, BERINGIN, RESONANCE, STUN_IMMUNITY }
@@ -90,53 +83,52 @@ static func _build() -> void:
 	# Bosses gain this when their HP reaches 60% (see BattleUnit): Stun no longer works on them.
 	_defs[Kind.STUN_IMMUNITY] = Def.new("Stun Immunity", true, 1, PERMANENT)
 
-## The "what does this do" text shown when hovering a status in battle,
-## with the real numbers for this unit (stacks, turns left, magnitude).
+# The "what does this do" text shown when hovering a status in battle,
+# with the real numbers for this unit (stacks, turns left, magnitude).
 static func describe(kind: Kind, st: StatusInstance) -> String:
 	var def := get_def(kind)
 	var turns := st.turns_left
 	var turn_text := "Lasts %d turn%s." % [turns, "" if turns == 1 else "s"]
-	match kind:
-		Kind.FIRE:
-			var fire_total: int = def.dot_per_stack * st.stacks
-			if st.stacks >= def.max_stacks:
-				fire_total += def.max_stack_bonus_damage
-			return "Turn End: take %d fixed damage (%d per stack, +%d extra at max stacks). Removed afterwards." % [fire_total, def.dot_per_stack, def.max_stack_bonus_damage]
-		Kind.POISON:
-			return "Turn End: take %d fixed damage (%d per stack). %s" % [def.dot_per_stack * st.stacks, def.dot_per_stack, turn_text]
-		Kind.STUN:
-			return "Cannot act on the next turn."
-		Kind.GLOOP:
-			return "Attacks against this unit deal +%d damage (+1 per 2 stacks). %s" % [st.stacks / 2, turn_text]
-		Kind.SAPPED:
-			return "Alteration skills cost +1 Energy. Expires at turn end."
-		Kind.STRENGTHEN:
-			return "+%d Strength until the mission ends." % st.magnitude
-		Kind.TIME_DILATION:
-			return "Takes 50%% less damage. Removed when stunned. %s" % turn_text
-		Kind.FLAME_WINGS:
-			return "Attackers gain 1 Fire when they hit this unit. Expires at turn end."
-		Kind.ENERGIZED:
-			return "Gain %d Energy at the start of the next turn." % st.magnitude
-		Kind.SWIFT:
-			return "+%d Speed (dodge chance is Speed - 15) until the mission ends." % st.magnitude
-		Kind.INJ_CQB:
-			return "+5 Speed and +10 Strength. %s Then lose 10%% of max HP." % turn_text
-		Kind.INJ_ACB:
-			return "+15 Capability. %s Then lose 10%% of max HP." % turn_text
-		Kind.VERLICHTING:
-			return "Strike: %d%% chance to gain 1 Energized (+1 Energy next turn)." % st.magnitude
-		Kind.SAKEPENG:
-			return "Each Strike adds a stack (max %d). +2 Speed per stack (now +%d)." % [st.magnitude, 2 * st.stacks]
-		Kind.BERINGIN:
-			return "Gain 1 Energy at the start of every %d turns." % st.magnitude
-		Kind.RESONANCE:
-			return "Each Strike adds a stack (max %d). +3 Capability per stack (now +%d)." % [st.magnitude, 3 * st.stacks]
-		Kind.STUN_IMMUNITY:
-			return "Can no longer be affected by the Stun debuff."
+	if kind == Kind.FIRE:
+		var fire_total: int = def.dot_per_stack * st.stacks
+		if st.stacks >= def.max_stacks:
+			fire_total += def.max_stack_bonus_damage
+		return "Turn End: take %d fixed damage (%d per stack, +%d extra at max stacks). Removed afterwards." % [fire_total, def.dot_per_stack, def.max_stack_bonus_damage]
+	elif kind == Kind.POISON:
+		return "Turn End: take %d fixed damage (%d per stack). %s" % [def.dot_per_stack * st.stacks, def.dot_per_stack, turn_text]
+	elif kind == Kind.STUN:
+		return "Cannot act on the next turn."
+	elif kind == Kind.GLOOP:
+		return "Attacks against this unit deal +%d damage (+1 per 2 stacks). %s" % [st.stacks / 2, turn_text]
+	elif kind == Kind.SAPPED:
+		return "Alteration skills cost +1 Energy. Expires at turn end."
+	elif kind == Kind.STRENGTHEN:
+		return "+%d Strength until the mission ends." % st.magnitude
+	elif kind == Kind.TIME_DILATION:
+		return "Takes 50%% less damage. Removed when stunned. %s" % turn_text
+	elif kind == Kind.FLAME_WINGS:
+		return "Attackers gain 1 Fire when they hit this unit. Expires at turn end."
+	elif kind == Kind.ENERGIZED:
+		return "Gain %d Energy at the start of the next turn." % st.magnitude
+	elif kind == Kind.SWIFT:
+		return "+%d Speed (dodge chance is Speed - 15) until the mission ends." % st.magnitude
+	elif kind == Kind.INJ_CQB:
+		return "+5 Speed and +10 Strength. %s Then lose 10%% of max HP." % turn_text
+	elif kind == Kind.INJ_ACB:
+		return "+15 Capability. %s Then lose 10%% of max HP." % turn_text
+	elif kind == Kind.VERLICHTING:
+		return "Strike: %d%% chance to gain 1 Energized (+1 Energy next turn)." % st.magnitude
+	elif kind == Kind.SAKEPENG:
+		return "Each Strike adds a stack (max %d). +2 Speed per stack (now +%d)." % [st.magnitude, 2 * st.stacks]
+	elif kind == Kind.BERINGIN:
+		return "Gain 1 Energy at the start of every %d turns." % st.magnitude
+	elif kind == Kind.RESONANCE:
+		return "Each Strike adds a stack (max %d). +3 Capability per stack (now +%d)." % [st.magnitude, 3 * st.stacks]
+	elif kind == Kind.STUN_IMMUNITY:
+		return "Can no longer be affected by the Stun debuff."
 	return ""
 
-## "Gloop x3", "Strengthen +3", "Sakepeng x2/5"... plus turns left where it matters.
+# "Gloop x3", "Strengthen +3", "Sakepeng x2/5"... plus turns left where it matters.
 static func title(kind: Kind, st: StatusInstance) -> String:
 	var def := get_def(kind)
 	var t := def.label

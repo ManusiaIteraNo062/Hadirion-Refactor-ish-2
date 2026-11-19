@@ -1,13 +1,7 @@
 extends Control
 class_name DialogueBox
-## Story/dialogue box. The layout is in scenes/ui/dialogue_box.tscn; this script fills it in.
-##
-## Usage:   await dialogue_box.play(lines)     # lines: Array of DialogueLine
-## Controls: click / Space / Enter = advance (first press finishes the
-## typewriter, second press goes to the next line). Esc or the Skip button
-## closes the whole conversation.
-##
-## Put this inside a CanvasLayer (layer 10) so it always draws on top.
+# Dialogue box (layout in dialogue_box.tscn). Use: await dialogue_box.play(lines).
+# Click/Space/Enter finishes the typewriter, then advances; Esc or Skip closes it.
 
 signal finished
 
@@ -73,7 +67,7 @@ func _apply_portrait(box: PanelContainer, line: DialogueLine) -> void:
 	art.visible = line.portrait != null
 	initial.visible = line.portrait == null
 
-## Awaitable. Returns once the player has finished (or skipped) the lines.
+# Awaitable. Returns once the player has finished (or skipped) the lines.
 func play(lines: Array) -> void:
 	if lines.is_empty():
 		return

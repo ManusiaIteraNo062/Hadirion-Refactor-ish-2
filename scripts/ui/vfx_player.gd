@@ -1,15 +1,10 @@
 extends RefCounted
 class_name VfxPlayer
-## Plays an effect scene somewhere and removes it when it is finished.
-## An effect can be:
-##   * CPUParticles2D / GPUParticles2D - played once (it is set to one-shot)
-##   * AnimatedSprite2D                - its animation played once (turn Loop off)
-##   * anything with an AnimationPlayer child - the first animation is played once
-##   * anything else                   - shown for a second
-## Never more than MAX_AT_ONCE effects at a time, so a busy turn can't slow the game down.
+# Plays an effect scene once (particles, AnimatedSprite2D, AnimationPlayer, or 1 s fallback)
+# and removes it. At most MAX_AT_ONCE effects run at a time.
 
 const MAX_AT_ONCE := 12
-## Safety net: an effect is removed after this many seconds even if it never says it is done.
+# Safety net: an effect is removed after this many seconds even if it never says it is done.
 const MAX_SECONDS := 3.0
 
 static var _playing: int = 0
@@ -29,7 +24,7 @@ static func play(effect: PackedScene, parent: Node, position: Vector2) -> void:
 	_start(fx)
 	parent.get_tree().create_timer(MAX_SECONDS).timeout.connect(_free_if_still_there.bind(fx))
 
-## How many effects are playing right now (the tests use this).
+# How many effects are playing right now (the tests use this).
 static func playing_count() -> int:
 	return _playing
 

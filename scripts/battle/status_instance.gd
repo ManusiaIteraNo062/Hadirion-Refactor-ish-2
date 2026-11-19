@@ -1,6 +1,6 @@
 extends RefCounted
 class_name StatusInstance
-## One status currently on one unit (runtime only, rebuilt every fight).
+# One status currently on one unit (runtime only, rebuilt every fight).
 
 var kind: StatusDefs.Kind
 var stacks: int = 0

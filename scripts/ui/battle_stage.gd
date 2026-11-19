@@ -1,13 +1,7 @@
 extends Node2D
 class_name BattleStage
-## Placeholder battlefield visuals: one stick figure per unit, in a 2x2 grid
-## per side (party left, enemies right), placed from the actual viewport size
-## so it follows window resizes and wider screens. Purely visual;
-## BattleManager/BattleUnit logic doesn't know this exists. Swap
-## CharacterPlaceholder's drawing for real art later without touching this.
-##
-## Also draws: a white marker over the unit whose turn it is, gold markers over
-## whatever the Target menu is hovering, and floating damage / heal numbers.
+# Battlefield visuals: one figure per unit (party left, enemies right), turn and
+# target markers, floating numbers. Purely visual; battle logic doesn't know it exists.
 
 @export var battle_manager: BattleManager
 
@@ -25,7 +19,7 @@ const PLAYER_COLOR := Color.WHITE
 const ENEMY_COLOR := Color(0.85, 0.2, 0.2) # red, matches the reference art
 const DEFEATED_TINT := Color(0.3, 0.3, 0.3, 0.5)
 
-## Must match the space BattleUI uses at the bottom/top (see BattleUI).
+# Must match the space BattleUI uses at the bottom/top (see BattleUI).
 const TOP_RESERVED := 150.0     # TURN/WAVE panels + enemy list live above this
 const BOTTOM_RESERVED := 258.0  # party bar + action panel + margins
 
@@ -141,7 +135,7 @@ func _apply_layout() -> void:
 	for unit in _markers:
 		_place_marker(unit)
 
-## Position in a 2x2 grid: row 0 is the top row, row 1 the bottom row (shifted a little right).
+# Position in a 2x2 grid: row 0 is the top row, row 1 the bottom row (shifted a little right).
 func _grid_position(x: float, row: int, row1: float, row2: float, screen_width: float) -> Vector2:
 	if row == 0:
 		return Vector2(x, row1)
@@ -149,7 +143,7 @@ func _grid_position(x: float, row: int, row1: float, row2: float, screen_width: 
 
 # ---- waves / defeat -------------------------------------------------------
 
-## A new wave arrived: remove the old enemy figures and place the new ones.
+# A new wave arrived: remove the old enemy figures and place the new ones.
 func _on_wave_started(units: Array) -> void:
 	for u in _enemy_units:
 		if _figures.has(u):
@@ -177,7 +171,7 @@ func _on_unit_defeated(unit: BattleUnit) -> void:
 
 # ---- poses and effects -------------------------------------------------------
 
-## Somebody used an action ("Strike", "Guard", an item name...). Show the right pose.
+# Somebody used an action ("Strike", "Guard", an item name...). Show the right pose.
 func _on_action_announced(user: BattleUnit, action_name: String) -> void:
 	_acting = null
 	if not _figures.has(user):
@@ -200,8 +194,8 @@ func _on_action_announced(user: BattleUnit, action_name: String) -> void:
 func _forget_acting() -> void:
 	_acting = null
 
-## True for party members, false for enemies. (BattleUnit.is_player_controlled is
-## never set to false for enemies, so it can't be used for this.)
+# True for party members, false for enemies. (BattleUnit.is_player_controlled is
+# never set to false for enemies, so it can't be used for this.)
 func _is_party(unit: BattleUnit) -> bool:
 	return _slots.get(unit, {}).get("party", true)
 
@@ -211,8 +205,8 @@ func _has_move_named(moves: Array, action_name: String) -> bool:
 			return true
 	return false
 
-## Looks up this unit's pictures and effects (characters: data/characters, enemies:
-## data/enemies). No Idle picture = the stick figure stays.
+# Looks up this unit's pictures and effects (characters: data/characters, enemies:
+# data/enemies). No Idle picture = the stick figure stays.
 func _load_art(unit: BattleUnit, figure: UnitVisual, party: bool) -> void:
 	var textures: Dictionary = {}
 	if party:
@@ -240,7 +234,7 @@ func _add_texture(textures: Dictionary, pose: String, texture: Texture2D) -> voi
 	if texture != null:
 		textures[pose] = texture
 
-## The party member's data file, found by name (the unit only knows its display name).
+# The party member's data file, found by name (the unit only knows its display name).
 func _template_for(unit: BattleUnit) -> CharacterTemplate:
 	for template in Roster.all():
 		if template.display_name == unit.stats.character_name:
@@ -264,7 +258,7 @@ func _on_hp_changed(unit: BattleUnit, new_hp: int) -> void:
 	if delta < 0:
 		_show_hit(unit)
 
-## The unit lost HP: play the attacker's hit effect on it, and show its Hurt pose.
+# The unit lost HP: play the attacker's hit effect on it, and show its Hurt pose.
 func _show_hit(unit: BattleUnit) -> void:
 	var fig: UnitVisual = _figures[unit]
 	if _acting != null and _acting != unit and _figures.has(_acting):
@@ -273,14 +267,14 @@ func _show_hit(unit: BattleUnit) -> void:
 	if unit.is_alive():
 		fig.show_pose("hurt", HURT_POSE_SECONDS)
 
-## A boss reached 60% HP: "Stun Immunity!" floats over it.
+# A boss reached 60% HP: "Stun Immunity!" floats over it.
 func _on_stun_immunity(unit: BattleUnit) -> void:
 	if not _figures.has(unit) or not is_instance_valid(_figures[unit]):
 		return
 	_float_text(_figures[unit], "Stun Immunity!", 22, Color(1.0, 0.82, 0.3), Vector2(-60.0, -34.0), 30.0, 1.4, 1.0, 0.9)
 
-## "Dodge!" over the target (any attack, even one that deals no damage) plus a
-## quick side-step away from the attacker's side.
+# "Dodge!" over the target (any attack, even one that deals no damage) plus a
+# quick side-step away from the attacker's side.
 func _on_dodged(target: BattleUnit, _attacker: BattleUnit) -> void:
 	if not _figures.has(target) or not is_instance_valid(_figures[target]):
 		return
@@ -295,9 +289,9 @@ func _on_dodged(target: BattleUnit, _attacker: BattleUnit) -> void:
 	step.tween_property(fig, "position:x", home.x + dir * 18.0, 0.1)
 	step.tween_property(fig, "position:x", home.x, 0.16)
 
-## Shows a number / word above a fighter. It floats up `rise` pixels while it
-## moves for `move_time` seconds, fades out over `fade_time` (starting after
-## `fade_delay`), then removes itself.
+# Shows a number / word above a fighter. It floats up `rise` pixels while it
+# moves for `move_time` seconds, fades out over `fade_time` (starting after
+# `fade_delay`), then removes itself.
 func _float_text(fig: UnitVisual, text: String, font_size: int, color: Color,
 		offset: Vector2, rise: float, move_time: float, fade_time: float, fade_delay: float) -> void:
 	var lbl: Label = FLOATING_TEXT_SCENE.instantiate()
@@ -321,7 +315,7 @@ func _set_active(unit: BattleUnit) -> void:
 	if unit != null:
 		_show_marker(unit, Color.WHITE)
 
-## Gold markers over the units the Target menu is hovering (empty = none).
+# Gold markers over the units the Target menu is hovering (empty = none).
 func show_target_markers(units: Array) -> void:
 	for u in _markers.keys():
 		if u != _active_unit:
@@ -353,7 +347,7 @@ func _clear_marker(unit: BattleUnit) -> void:
 		_markers[unit].queue_free()
 		_markers.erase(unit)
 
-## A small downward-pointing arrow drawn above a unit's head.
+# A small downward-pointing arrow drawn above a unit's head.
 class FieldMarker extends Node2D:
 	var color: Color = Color.WHITE
 	func _draw() -> void:

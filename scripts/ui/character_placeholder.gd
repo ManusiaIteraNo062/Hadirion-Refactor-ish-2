@@ -1,8 +1,8 @@
 extends Node2D
 class_name CharacterPlaceholder
-## Draws a simple stick figure with code - no sprite/art needed yet.
-## Swap _draw() for a Sprite2D/AnimatedSprite2D later; nothing that
-## positions or references this node has to change.
+# Draws a simple stick figure with code - no sprite/art needed yet.
+# Swap _draw() for a Sprite2D/AnimatedSprite2D later; nothing that
+# positions or references this node has to change.
 
 @export var color: Color = Color.WHITE
 @export var figure_scale: float = 1.0

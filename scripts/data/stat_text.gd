@@ -1,7 +1,7 @@
 extends RefCounted
 class_name StatText
-## "+10 HP  +5 STR  -5 SPD" text shared by upgrades and equipment.
-## STR = Strength (the Attack stat), CAP = Capability, SPD = Speed.
+# "+10 HP  +5 STR  -5 SPD" text shared by upgrades and equipment.
+# STR = Strength (the Attack stat), CAP = Capability, SPD = Speed.
 
 static func bonuses(hp: int, str_: int, cap: int, spd: int) -> String:
 	var parts: PackedStringArray = []
