@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterTemplate" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/character_template.gd" id="1_cn4tj"]
+[ext_resource type="SpriteFrames" path="res://assets/characters/helder/helder_frames.tres" id="2_frames"]
 
 [resource]
 script = ExtResource("1_cn4tj")
@@ -11,3 +12,4 @@ speed = 8
 base_upgrade_id = "helder_baton"
 basic_name = "Drabo"
 color = Color(0.3, 0.75, 0.8, 1)
+sprite_frames = ExtResource("2_frames")

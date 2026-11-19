@@ -13,4 +13,8 @@ horizontal_alignment = 1
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1707936303]
 visible = false
 
+[node name="AnimSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+
 [node name="VfxAnchor" type="Marker2D" parent="." unique_id=425001711]

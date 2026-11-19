@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c3660dbchfh0f"
+
+[deps]
+
+files=["res://assets/characters/helder/credits/credits.notes.translation", "res://assets/characters/helder/credits/credits.authors.translation", "res://assets/characters/helder/credits/credits.licenses.translation", "res://assets/characters/helder/credits/credits.urls.translation"]
+
+source_file="res://assets/characters/helder/credits/credits.csv"
+dest_files=["res://assets/characters/helder/credits/credits.notes.translation", "res://assets/characters/helder/credits/credits.authors.translation", "res://assets/characters/helder/credits/credits.licenses.translation", "res://assets/characters/helder/credits/credits.urls.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -54,6 +54,7 @@ func _init() -> void:
 	var hit_effect: PackedScene = load("res://scenes/vfx/hit_burst.tscn")
 	var glow_effect: PackedScene = load("res://scenes/vfx/alter_glow.tscn")
 	var template: CharacterTemplate = Roster.get_def("helder")
+	template.sprite_frames = null   # this test is about single pictures (Helder has a sprite sheet: tests/anim_test.gd)
 	template.idle_texture = idle_pic
 	template.attack_texture = attack_pic
 	template.alter_texture = alter_pic

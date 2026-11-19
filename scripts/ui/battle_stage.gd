@@ -1,7 +1,17 @@
 extends Node2D
 class_name BattleStage
-# Battlefield visuals: one figure per unit (party left, enemies right), turn and
-# target markers, floating numbers. Purely visual; battle logic doesn't know it exists.
+## Placeholder battlefield visuals: one stick figure per unit, in a 2x2 grid
+## per side (party left, enemies right), placed from the actual viewport size
+## so it follows window resizes and wider screens. Purely visual;
+## BattleManager/BattleUnit logic doesn't know this exists. Swap
+## CharacterPlaceholder's drawing for real art later without touching this.
+##
+## Also draws: a white marker over the unit whose turn it is, gold markers over
+## whatever the Target menu is hovering, and floating damage / heal numbers.
+##
+## One exception to "purely visual": a party member with an animated sprite sheet jumps next to its
+## target before a Basic attack lands. For that the stage asks the BattleManager to wait a moment
+## (visual_lead_in / visual_follow_through), so the damage shows up when the club hits.
 
 @export var battle_manager: BattleManager
 
@@ -14,12 +24,13 @@ const FLOATING_TEXT_SCENE := preload("res://scenes/battle/floating_text.tscn")
 const ATTACK_POSE_SECONDS := 0.45
 const ALTER_POSE_SECONDS := 0.7
 const HURT_POSE_SECONDS := 0.35
+const GUARD_POSE_SECONDS := 0.7
 
 const PLAYER_COLOR := Color.WHITE
 const ENEMY_COLOR := Color(0.85, 0.2, 0.2) # red, matches the reference art
 const DEFEATED_TINT := Color(0.3, 0.3, 0.3, 0.5)
 
-# Must match the space BattleUI uses at the bottom/top (see BattleUI).
+## Must match the space BattleUI uses at the bottom/top (see BattleUI).
 const TOP_RESERVED := 150.0     # TURN/WAVE panels + enemy list live above this
 const BOTTOM_RESERVED := 258.0  # party bar + action panel + margins
 
@@ -30,6 +41,8 @@ var _last_hp: Dictionary = {}   # BattleUnit -> HP last time we looked (for floa
 var _markers: Dictionary = {}   # BattleUnit -> FieldMarker
 var _active_unit: BattleUnit
 var _acting: BattleUnit         # who attacked just now (hits that land in the same moment show its effect)
+var _announced_kind: String = ""   # "attack" or "alter": what a party member just announced (for action_targeted)
+var _holding_attacker: bool = false   # a jump is on its way: keep remembering who attacks until the hit lands
 
 func _ready() -> void:
 	position = Vector2.ZERO # layout is in screen space now; ignore any old offset
@@ -45,6 +58,7 @@ func _ready() -> void:
 	battle_manager.wave_started.connect(_on_wave_started)
 	battle_manager.attack_dodged.connect(_on_dodged)
 	battle_manager.action_announced.connect(_on_action_announced)
+	battle_manager.action_targeted.connect(_on_action_targeted)
 	battle_manager.player_turn_started.connect(_on_player_turn_started)
 	battle_manager.enemy_turn_started.connect(_on_enemy_turn_started)
 	battle_manager.battle_ended.connect(_on_battle_ended)
@@ -135,7 +149,7 @@ func _apply_layout() -> void:
 	for unit in _markers:
 		_place_marker(unit)
 
-# Position in a 2x2 grid: row 0 is the top row, row 1 the bottom row (shifted a little right).
+## Position in a 2x2 grid: row 0 is the top row, row 1 the bottom row (shifted a little right).
 func _grid_position(x: float, row: int, row1: float, row2: float, screen_width: float) -> Vector2:
 	if row == 0:
 		return Vector2(x, row1)
@@ -143,7 +157,7 @@ func _grid_position(x: float, row: int, row1: float, row2: float, screen_width: 
 
 # ---- waves / defeat -------------------------------------------------------
 
-# A new wave arrived: remove the old enemy figures and place the new ones.
+## A new wave arrived: remove the old enemy figures and place the new ones.
 func _on_wave_started(units: Array) -> void:
 	for u in _enemy_units:
 		if _figures.has(u):
@@ -171,9 +185,10 @@ func _on_unit_defeated(unit: BattleUnit) -> void:
 
 # ---- poses and effects -------------------------------------------------------
 
-# Somebody used an action ("Strike", "Guard", an item name...). Show the right pose.
+## Somebody used an action ("Strike", "Guard", an item name...). Show the right pose.
 func _on_action_announced(user: BattleUnit, action_name: String) -> void:
 	_acting = null
+	_announced_kind = ""
 	if not _figures.has(user):
 		return
 	var fig: UnitVisual = _figures[user]
@@ -185,17 +200,57 @@ func _on_action_announced(user: BattleUnit, action_name: String) -> void:
 		fig.show_pose("alter", ALTER_POSE_SECONDS)
 		fig.flicker()
 		VfxPlayer.play(fig.alter_vfx, self, fig.vfx_position())
+		_announced_kind = "alter"
 	elif _has_move_named(user.basic_moves, action_name):
 		fig.show_pose("attack", ATTACK_POSE_SECONDS)
 		_acting = user
+		_announced_kind = "attack"
+	elif action_name == "Guard":
+		fig.show_pose("guard", GUARD_POSE_SECONDS)
 	# The damage from this action lands in the same moment; after that, forget who acted.
 	get_tree().create_timer(0.1).timeout.connect(_forget_acting)
 
+## The action is aimed at `targets` (emitted right after action_announced).
+## A party member with an animated sprite sheet moves here: a Basic attack jumps next to the first
+## target and swings the club; an Alteration plays its spellcast. Then the stage asks the
+## BattleManager to wait (visual_lead_in, visual_follow_through), so the damage shows up when the
+## club hits and the next turn only starts when the animation is over.
+func _on_action_targeted(user: BattleUnit, targets: Array) -> void:
+	if _announced_kind == "" or not _figures.has(user) or not _is_party(user):
+		return
+	var fig: UnitVisual = _figures[user]
+	if not fig.is_animated():
+		return
+	var lead_in: float = 0.0          # seconds until the hit lands
+	var follow_through: float = 0.0   # seconds after it, until the animation is over
+	if _announced_kind == "attack" and fig.can_lunge() and not targets.is_empty() and _figures.has(targets[0]):
+		var target_fig: UnitVisual = _figures[targets[0]]
+		var stand_off: float = fig.lunge_distance * fig.figure_scale / 0.65
+		fig.play_lunge(target_fig.position - Vector2(stand_off, 0.0))
+		lead_in = fig.lunge_impact_seconds()
+		follow_through = fig.lunge_total_seconds() - lead_in
+	elif _announced_kind == "alter":
+		lead_in = fig.alter_impact_seconds()
+		follow_through = maxf(0.0, fig.anim_seconds("alter") - lead_in)
+	if lead_in <= 0.0:
+		return
+	battle_manager.visual_lead_in = lead_in
+	battle_manager.visual_follow_through = follow_through
+	_set_active(null)           # the white marker would hang over the empty spot
+	_holding_attacker = true    # keep remembering who attacks until the hit has landed
+	get_tree().create_timer(lead_in + 0.1).timeout.connect(_release_attacker)
+
 func _forget_acting() -> void:
+	if _holding_attacker:
+		return   # a jump is on its way: stay remembered until the hit lands (see _release_attacker)
 	_acting = null
 
-# True for party members, false for enemies. (BattleUnit.is_player_controlled is
-# never set to false for enemies, so it can't be used for this.)
+func _release_attacker() -> void:
+	_holding_attacker = false
+	_acting = null
+
+## True for party members, false for enemies. (BattleUnit.is_player_controlled is
+## never set to false for enemies, so it can't be used for this.)
 func _is_party(unit: BattleUnit) -> bool:
 	return _slots.get(unit, {}).get("party", true)
 
@@ -205,20 +260,25 @@ func _has_move_named(moves: Array, action_name: String) -> bool:
 			return true
 	return false
 
-# Looks up this unit's pictures and effects (characters: data/characters, enemies:
-# data/enemies). No Idle picture = the stick figure stays.
+## Looks up this unit's pictures and effects (characters: data/characters, enemies:
+## data/enemies). No Idle picture = the stick figure stays.
 func _load_art(unit: BattleUnit, figure: UnitVisual, party: bool) -> void:
 	var textures: Dictionary = {}
 	if party:
 		var template: CharacterTemplate = _template_for(unit)
 		if template == null:
 			return
+		figure.attack_vfx = template.attack_vfx
+		figure.alter_vfx = template.alter_vfx
+		# An animated sprite sheet wins over the single pictures.
+		if template.sprite_frames != null:
+			figure.set_animated_art(template.sprite_frames, false)
+			if figure.is_animated():
+				return
 		_add_texture(textures, "idle", template.idle_texture)
 		_add_texture(textures, "attack", template.attack_texture)
 		_add_texture(textures, "alter", template.alter_texture)
 		_add_texture(textures, "hurt", template.hurt_texture)
-		figure.attack_vfx = template.attack_vfx
-		figure.alter_vfx = template.alter_vfx
 	else:
 		var enemy_type: EnemyType = EnemyLibrary.type_for_id(unit.enemy_id)
 		if enemy_type == null:
@@ -234,7 +294,7 @@ func _add_texture(textures: Dictionary, pose: String, texture: Texture2D) -> voi
 	if texture != null:
 		textures[pose] = texture
 
-# The party member's data file, found by name (the unit only knows its display name).
+## The party member's data file, found by name (the unit only knows its display name).
 func _template_for(unit: BattleUnit) -> CharacterTemplate:
 	for template in Roster.all():
 		if template.display_name == unit.stats.character_name:
@@ -258,7 +318,7 @@ func _on_hp_changed(unit: BattleUnit, new_hp: int) -> void:
 	if delta < 0:
 		_show_hit(unit)
 
-# The unit lost HP: play the attacker's hit effect on it, and show its Hurt pose.
+## The unit lost HP: play the attacker's hit effect on it, and show its Hurt pose.
 func _show_hit(unit: BattleUnit) -> void:
 	var fig: UnitVisual = _figures[unit]
 	if _acting != null and _acting != unit and _figures.has(_acting):
@@ -267,14 +327,14 @@ func _show_hit(unit: BattleUnit) -> void:
 	if unit.is_alive():
 		fig.show_pose("hurt", HURT_POSE_SECONDS)
 
-# A boss reached 60% HP: "Stun Immunity!" floats over it.
+## A boss reached 60% HP: "Stun Immunity!" floats over it.
 func _on_stun_immunity(unit: BattleUnit) -> void:
 	if not _figures.has(unit) or not is_instance_valid(_figures[unit]):
 		return
 	_float_text(_figures[unit], "Stun Immunity!", 22, Color(1.0, 0.82, 0.3), Vector2(-60.0, -34.0), 30.0, 1.4, 1.0, 0.9)
 
-# "Dodge!" over the target (any attack, even one that deals no damage) plus a
-# quick side-step away from the attacker's side.
+## "Dodge!" over the target (any attack, even one that deals no damage) plus a
+## quick side-step away from the attacker's side.
 func _on_dodged(target: BattleUnit, _attacker: BattleUnit) -> void:
 	if not _figures.has(target) or not is_instance_valid(_figures[target]):
 		return
@@ -289,9 +349,9 @@ func _on_dodged(target: BattleUnit, _attacker: BattleUnit) -> void:
 	step.tween_property(fig, "position:x", home.x + dir * 18.0, 0.1)
 	step.tween_property(fig, "position:x", home.x, 0.16)
 
-# Shows a number / word above a fighter. It floats up `rise` pixels while it
-# moves for `move_time` seconds, fades out over `fade_time` (starting after
-# `fade_delay`), then removes itself.
+## Shows a number / word above a fighter. It floats up `rise` pixels while it
+## moves for `move_time` seconds, fades out over `fade_time` (starting after
+## `fade_delay`), then removes itself.
 func _float_text(fig: UnitVisual, text: String, font_size: int, color: Color,
 		offset: Vector2, rise: float, move_time: float, fade_time: float, fade_delay: float) -> void:
 	var lbl: Label = FLOATING_TEXT_SCENE.instantiate()
@@ -315,7 +375,7 @@ func _set_active(unit: BattleUnit) -> void:
 	if unit != null:
 		_show_marker(unit, Color.WHITE)
 
-# Gold markers over the units the Target menu is hovering (empty = none).
+## Gold markers over the units the Target menu is hovering (empty = none).
 func show_target_markers(units: Array) -> void:
 	for u in _markers.keys():
 		if u != _active_unit:
@@ -347,7 +407,7 @@ func _clear_marker(unit: BattleUnit) -> void:
 		_markers[unit].queue_free()
 		_markers.erase(unit)
 
-# A small downward-pointing arrow drawn above a unit's head.
+## A small downward-pointing arrow drawn above a unit's head.
 class FieldMarker extends Node2D:
 	var color: Color = Color.WHITE
 	func _draw() -> void:

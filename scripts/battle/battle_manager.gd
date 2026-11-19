@@ -1,19 +1,32 @@
 extends Node
 class_name BattleManager
-# Runs the fight. Each round all alive players act, then all alive enemies;
-# Speed is only dodge chance, and crit chance is one global rate.
-# Player turns wait (await) until the UI calls submit_player_action().
+## Orchestrates the whole fight.
+##
+## Turn order (rule 1): each round, every alive PLAYER unit acts in order,
+## then every alive ENEMY unit acts in order. No interleaving by speed -
+## Speed is used only as dodge chance (see CharacterStats), not turn order.
+## Crit chance is a fixed global rate (CRIT_CHANCE below), same for
+## allies and enemies - it is not a per-unit stat.
+##
+## Player turns are driven by an `await` on a signal: nothing happens until
+## the UI (or any other input source) calls submit_player_action(). This
+## satisfies rule 4 - the player explicitly picks every action for every
+## member, one at a time.
 
 signal battle_log(text: String)
 signal round_started(round_number: int)
 signal player_turn_started(unit: BattleUnit, available_actions: Dictionary)
 signal enemy_turn_started(unit: BattleUnit)
+signal action_resolved(unit: BattleUnit, description: String)
 signal battle_ended(player_won: bool)
-# "Name used" strip: who did what ("Condemn", "Guard", an item name...).
+## "Name used" strip: who did what ("Condemn", "Guard", an item name...).
 signal action_announced(user: BattleUnit, action_name: String)
-# An enemy shows up (battle start or a new wave): the encyclopedia remembers it.
+## Who that action is aimed at (emitted right after action_announced; Guard has no targets).
+## The battle stage uses it to make a fighter jump next to its target before the hit lands.
+signal action_targeted(user: BattleUnit, targets: Array)
+## An enemy shows up (battle start or a new wave): the encyclopedia remembers it.
 signal enemy_met(unit: BattleUnit)
-# An attack missed. Emitted for EVERY attack, damaging or not (the UI shows "Dodge!").
+## An attack missed. Emitted for EVERY attack, damaging or not (the UI shows "Dodge!").
 signal attack_dodged(target: BattleUnit, attacker: BattleUnit)
 signal wave_started(units: Array) # a new group of enemies has just appeared (waves 2+)
 
@@ -22,9 +35,9 @@ signal wave_started(units: Array) # a new group of enemies has just appeared (wa
 
 var party_inventory: Dictionary = {} # Item -> int quantity
 
-# Multi-wave battles: enemy_team is wave 1; wave_factory(i) builds wave i
-# (0-based) as an Array of BattleUnit. The party's HP, energy, items and
-# statuses carry over between waves. battle_ended fires after the LAST wave.
+## Multi-wave battles: enemy_team is wave 1; wave_factory(i) builds wave i
+## (0-based) as an Array of BattleUnit. The party's HP, energy, items and
+## statuses carry over between waves. battle_ended fires after the LAST wave.
 var wave_count: int = 1
 var wave_factory: Callable
 var current_wave: int = 1 # 1-based, for display
@@ -32,15 +45,23 @@ var current_wave: int = 1 # 1-based, for display
 const CRIT_CHANCE := 1.0 / 14.0 # fixed for BOTH allies and enemies
 const CRIT_MULTIPLIER := 1.5
 
-# Training mode: infinite energy for the party, set before start_battle().
-# The battle only ends when abort_battle() is called (or someone falls).
+## Training mode: infinite energy for the party, set before start_battle().
+## The battle only ends when abort_battle() is called (or someone falls).
 var training: bool = false
 
-# Test hook: a fixed 0-100 roll for Verlichting (negative = real randomness).
+## Test hook: a fixed 0-100 roll for Verlichting (negative = real randomness).
 var proc_roll_override: float = -1.0
 
-# Instance copy so tests can force crits off (set to 0.0).
+## Instance copy so tests can force crits off (set to 0.0).
 var crit_chance: float = CRIT_CHANCE
+
+## Visual pacing. The battle stage sets these while it handles action_targeted, and each one is
+## reset to 0 the moment it is used. Only PLAYER actions wait - enemy turns never do. With no
+## stage watching, both stay 0 and nothing changes (so the tests are not affected).
+##   visual_lead_in        - seconds to wait BEFORE the action lands (a fighter jumping next to its target)
+##   visual_follow_through - seconds to wait AFTER it landed, before the turn goes on (the swing finishing)
+var visual_lead_in: float = 0.0
+var visual_follow_through: float = 0.0
 
 var _round_number: int = 0
 var _pending_action: Dictionary = {}
@@ -102,59 +123,40 @@ func _run_battle_loop() -> void:
 			if _stopped or await _check_battle_over():
 				return
 
-# Returns what a unit is currently allowed to pick from. The UI should
-# build its menu straight from this rather than assuming moves are usable.
+## Returns what a unit is currently allowed to pick from. The UI should
+## build its menu straight from this rather than assuming moves are usable.
 func get_available_actions(unit: BattleUnit) -> Dictionary:
-	var usable := []
-	var locked := []
-	for move in unit.alteration_moves:
-		if unit.can_use_move(move):
-			usable.append(move)
-		else:
-			locked.append(move)
-	var items := []
-	for item in party_inventory.keys():
-		if party_inventory[item] > 0:
-			items.append(item)
 	return {
 		"basic": unit.basic_moves,
-		"alteration": usable,
-		"locked_alteration": locked,
-		"items": items,
+		"alteration": unit.alteration_moves.filter(func(m): return unit.can_use_move(m)),
+		"locked_alteration": unit.alteration_moves.filter(func(m): return not unit.can_use_move(m)),
+		"items": party_inventory.keys().filter(func(i): return party_inventory[i] > 0),
 	}
 
-# The units of a team that are still alive.
-func _alive_units(team: Array) -> Array:
-	var alive := []
-	for u in team:
-		if u.is_alive():
-			alive.append(u)
-	return alive
-
-# Returns true if the unit loses its turn to a stun (and uses up one stun
-# turn). Called BEFORE anything else in a turn, so a stunned enemy's
-# pattern does not advance on the lost turn.
+## Returns true if the unit loses its turn to a stun (and uses up one stun
+## turn). Called BEFORE anything else in a turn, so a stunned enemy's
+## pattern does not advance on the lost turn.
 func _consume_stun(unit: BattleUnit) -> bool:
 	if not unit.consume_stun():
 		return false
 	battle_log.emit("%s is stunned and loses the turn!" % unit.stats.character_name)
 	return true
 
-# End of a unit's turn: damage over time, then status durations count down.
+## End of a unit's turn: damage over time, then status durations count down.
 func _finish_turn(unit: BattleUnit) -> void:
 	unit.is_acting = false
 	unit.tick_end_of_turn()
 	unit.tick_cooldowns()
 
-# Energy promised by an Energized status (Palesa - Stance "Heroik") arrives at
-# the very start of the unit's next turn.
+## Energy promised by an Energized status (Palesa - Stance "Heroik") arrives at
+## the very start of the unit's next turn.
 func _grant_stored_energy(unit: BattleUnit) -> void:
 	var stored := unit.consume_energized()
 	if stored > 0:
 		unit.gain_energy(stored)
 		battle_log.emit("%s gains %d Energy!" % [unit.stats.character_name, stored])
 
-# Upgrade passives that fire when the unit uses Strike (the Attack action).
+## Upgrade passives that fire when the unit uses Strike (the Attack action).
 func _on_strike(unit: BattleUnit) -> void:
 	if unit.has_status(StatusDefs.Kind.VERLICHTING):
 		var chance := float(unit.magnitude_of(StatusDefs.Kind.VERLICHTING))
@@ -166,7 +168,7 @@ func _on_strike(unit: BattleUnit) -> void:
 		if unit.gain_passive_stack(kind):
 			battle_log.emit("%s: %s grows." % [unit.stats.character_name, StatusDefs.get_def(kind).label])
 
-# Beringin: +1 Energy at the start of every Nth turn of this unit.
+## Beringin: +1 Energy at the start of every Nth turn of this unit.
 func _beringin_tick(unit: BattleUnit) -> void:
 	unit.turns_taken += 1
 	var every := unit.magnitude_of(StatusDefs.Kind.BERINGIN)
@@ -187,21 +189,21 @@ func _process_player_turn(unit: BattleUnit) -> void:
 	_waiting_for_player = false
 	if _stopped:
 		return
-	_execute_action(unit, _pending_action)
+	await _execute_action(unit, _pending_action)
 	_finish_turn(unit)
 
-# Called by the UI (or any input layer) once the player has fully chosen
-# an action + target(s) for the unit whose turn it currently is.
-# action_data shape: { type: "basic"|"alteration"|"item"|"guard",
-#                       move: Move (optional), item: Item (optional),
-#                       targets: Array[BattleUnit] }
+## Called by the UI (or any input layer) once the player has fully chosen
+## an action + target(s) for the unit whose turn it currently is.
+## action_data shape: { type: "basic"|"alteration"|"item"|"guard",
+##                       move: Move (optional), item: Item (optional),
+##                       targets: Array[BattleUnit] }
 func submit_player_action(action_data: Dictionary) -> void:
 	if not _waiting_for_player:
 		return
 	_pending_action = action_data
 	_player_action_submitted.emit()
 
-# Leaves a training session (counts as a "win" so the flow just carries on).
+## Leaves a training session (counts as a "win" so the flow just carries on).
 func abort_battle() -> void:
 	if _stopped:
 		return
@@ -231,9 +233,14 @@ func _process_enemy_turn(unit: BattleUnit) -> void:
 		_execute_action(unit, action_data)
 	_finish_turn(unit)
 
-# Enemy action selection: the next move from its EnemyMoveset (no moveset = Guard).
+## Enemy action selection.
+## Priority 1: a fixed EnemyMoveset (rule addition) - no energy, no
+## Basic/Alteration split, just "what's next in the pattern".
+## Priority 2 (fallback, only used if an enemy has no moveset assigned):
+## the old lightweight random AI, kept around in case you want a
+## non-pattern "wild" enemy type too.
 func _choose_enemy_action(unit: BattleUnit) -> Dictionary:
-	var alive_targets := _alive_units(player_team)
+	var alive_targets: Array = player_team.filter(func(u): return u.is_alive())
 	if alive_targets.is_empty():
 		return {}
 
@@ -243,11 +250,20 @@ func _choose_enemy_action(unit: BattleUnit) -> Dictionary:
 			return {}
 		return {"type": "enemy_move", "move": move, "targets": _resolve_targets(move, alive_targets)}
 
+	var usable_alterations: Array = unit.alteration_moves.filter(func(m): return unit.can_use_move(m))
+	if usable_alterations.size() > 0 and randf() < 0.35:
+		var move: Move = usable_alterations[randi() % usable_alterations.size()]
+		return {"type": "alteration", "move": move, "targets": [alive_targets[randi() % alive_targets.size()]]}
+
+	if unit.basic_moves.size() > 0:
+		var move: Move = unit.basic_moves[randi() % unit.basic_moves.size()]
+		return {"type": "basic", "move": move, "targets": [alive_targets[randi() % alive_targets.size()]]}
+
 	return {"type": "guard", "targets": []}
 
-# Shared target resolution for a move against a pool of valid candidates
-# (used by fixed-pattern enemies; single target is random among the pool,
-# ALL_* target types hit everyone in the pool).
+## Shared target resolution for a move against a pool of valid candidates
+## (used by fixed-pattern enemies; single target is random among the pool,
+## ALL_* target types hit everyone in the pool).
 func _resolve_targets(move: Move, candidates: Array) -> Array:
 	if candidates.is_empty():
 		return []
@@ -268,6 +284,15 @@ func _execute_action(unit: BattleUnit, action_data: Dictionary) -> void:
 	elif action_data.has("item"):
 		shown = action_data["item"].item_name
 	action_announced.emit(unit, shown)
+	action_targeted.emit(unit, targets)
+
+	# The stage may ask for a moment before the action lands (a fighter jumping next to its target).
+	var lead_in: float = visual_lead_in
+	visual_lead_in = 0.0
+	if lead_in > 0.0:
+		await get_tree().create_timer(lead_in).timeout
+		if _stopped:
+			return
 
 	match type:
 		"enemy_move":
@@ -299,6 +324,13 @@ func _execute_action(unit: BattleUnit, action_data: Dictionary) -> void:
 			unit.add_status(StatusDefs.Kind.ENERGIZED, 1, 0, 1, false)
 			battle_log.emit("%s guards." % unit.stats.character_name)
 
+	action_resolved.emit(unit, "%s's turn resolved." % unit.stats.character_name)
+
+	# ... and a moment after it, so the swing can finish before the next turn starts.
+	var follow_through: float = visual_follow_through
+	visual_follow_through = 0.0
+	if follow_through > 0.0:
+		await get_tree().create_timer(follow_through).timeout
 
 func _resolve_move(user: BattleUnit, move: Move, targets: Array) -> void:
 	# Effects on the user, once per use: granted statuses (Time Dilation, Flame
@@ -360,8 +392,8 @@ func _resolve_move(user: BattleUnit, move: Move, targets: Array) -> void:
 		user.heal(once_heal)
 		battle_log.emit("%s recovers %d HP!" % [user.stats.character_name, once_heal])
 
-# One damaging hit: dodge -> damage (+crit) -> lifesteal -> execute -> stun.
-# Returns true if the hit connected (was not dodged).
+## One damaging hit: dodge -> damage (+crit) -> lifesteal -> execute -> stun.
+## Returns true if the hit connected (was not dodged).
 func _resolve_hit(user: BattleUnit, move: Move, target: BattleUnit, apply_inflicts: bool = true) -> bool:
 	if target.roll_dodge():
 		battle_log.emit("%s dodges %s's %s!" % [
@@ -435,7 +467,7 @@ func _resolve_hit(user: BattleUnit, move: Move, target: BattleUnit, apply_inflic
 		user.add_status(StatusDefs.Kind.FIRE)
 	return true
 
-# Stun + the move's `inflicts` list, applied to one target.
+## Stun + the move's `inflicts` list, applied to one target.
 func _apply_hit_statuses(move: Move, target: BattleUnit, with_inflicts: bool = true) -> void:
 	if not target.is_alive():
 		return
@@ -444,7 +476,7 @@ func _apply_hit_statuses(move: Move, target: BattleUnit, with_inflicts: bool = t
 	if with_inflicts:
 		_apply_statuses(target, move.inflicts, null)
 
-# `source` is the unit using the move; it supplies the Capability for magnitude_per_cap.
+## `source` is the unit using the move; it supplies the Capability for magnitude_per_cap.
 func _apply_statuses(unit: BattleUnit, applications: Array, source: BattleUnit = null) -> void:
 	for a in applications:
 		if a:
@@ -482,11 +514,11 @@ func _resolve_item(user: BattleUnit, item: Item, targets: Array) -> void:
 				user.stats.character_name, item.item_name, target.stats.character_name
 			])
 
-# Returns true when the whole battle is over. Clearing a wave that is not the
-# last one spawns the next wave and returns false.
+## Returns true when the whole battle is over. Clearing a wave that is not the
+## last one spawns the next wave and returns false.
 func _check_battle_over() -> bool:
-	var players_alive := not _alive_units(player_team).is_empty()
-	var enemies_alive := not _alive_units(enemy_team).is_empty()
+	var players_alive: bool = not player_team.filter(func(u): return u.is_alive()).is_empty()
+	var enemies_alive: bool = not enemy_team.filter(func(u): return u.is_alive()).is_empty()
 	if not players_alive:
 		battle_log.emit("The party has been defeated...")
 		battle_ended.emit(false)
@@ -515,7 +547,7 @@ func _spawn_next_wave() -> void:
 	_announce_enemies(typed)
 	wave_started.emit(typed)
 
-# Test hook: resolves one hit and returns the HP the target lost.
+## Test hook: resolves one hit and returns the HP the target lost.
 func _resolve_hit_for_test(user: BattleUnit, move: Move, target: BattleUnit) -> int:
 	var before := target.current_health
 	_resolve_hit(user, move, target)

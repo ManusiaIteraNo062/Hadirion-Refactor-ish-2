@@ -27,6 +27,37 @@ then open the character's `.tres` (`data/characters/`) or enemy's `.tres`
   **Art Size** on the root node of `scenes/battle/unit_visual.tscn`.
 * Defeated party member: dragged off to the left. Defeated enemy: fades out.
 
+## 1b. Animated sprite sheets (instead of single pictures)
+A character can use an animated sprite sheet instead of one picture per pose. Helder does
+(`assets/characters/helder/helder_frames.tres`). It is a **SpriteFrames** resource: drag it into
+**Sprite Frames** under *Battle art* in the character's `.tres`. It wins over the single pictures.
+
+Animation names matter. Only `idle` is required; a missing one just shows idle.
+
+| Animation | When it plays |
+|---|---|
+| `idle` | loops while standing around (LPC "combat" row, 2 frames) |
+| `jump` | the hop to the target and back (Basic attack) |
+| `attack` | the club swing, once the jump has landed (Basic attack) |
+| `alter` | the spellcast (Alterations) |
+| `hurt` | a short flinch when hit |
+| `defeat` | falls down and stays down (while dragged off when defeated) |
+| `guard` | Guard |
+
+* **Basic attack** = jump next to the first target, swing, jump back. The damage shows up when the
+  swing reaches *Attack Impact Frame*: the BattleManager waits for it (`visual_lead_in`), and the next
+  turn starts when the fighter is home again (`visual_follow_through`). An **Alteration** waits until
+  *Alter Impact Frame* the same way. Enemy turns never wait.
+* Tune it in the Inspector on the root node of `scenes/battle/unit_visual.tscn`: *Anim Size*,
+  *Anim Feet Y*, *Lunge Distance / Jump Seconds / Jump Height / Hold Seconds*, *Attack / Alter Impact Frame*.
+  Speed and loop of each animation: open the `.tres` and use the SpriteFrames panel at the bottom.
+* The frames of one animation may be bigger than another's (LPC's club swing is 192 x 192, the rest
+  64 x 64) as long as the character is centred in the frame.
+* LPC sheets: 64 x 64 frames; the rows are up / left / down / **right** (we use the right row, index 3).
+  `hurt` has only one row (facing the camera).
+* LPC art needs credit: keep `assets/characters/helder/credits/credits.txt` and show it in the game's credits.
+* Check your work: `godot --headless --path . --script res://tests/anim_test.gd` -> ALL PASSED.
+
 ## 2. Effects (VFX)
 Each effect is a scene (`.tscn`). Put them in `assets/vfx/` or `scenes/vfx/`, then drag
 them into the character / enemy `.tres`:
