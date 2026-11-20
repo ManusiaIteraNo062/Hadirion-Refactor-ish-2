@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="CharacterTemplate" format=3]
+[gd_resource type="Resource" script_class="CharacterTemplate" format=3 uid="uid://nbm2iiymo3a7"]
 
-[ext_resource type="Script" path="res://scripts/data/character_template.gd" id="1_cn4tj"]
-[ext_resource type="SpriteFrames" path="res://assets/characters/helder/helder_frames.tres" id="2_frames"]
+[ext_resource type="Script" uid="uid://jyr2afgrfuff" path="res://scripts/data/character_template.gd" id="1_cn4tj"]
+[ext_resource type="SpriteFrames" uid="uid://ymnj7x5pqd78" path="res://assets/characters/helder/helder_frames.tres" id="2_frames"]
 
 [resource]
 script = ExtResource("1_cn4tj")

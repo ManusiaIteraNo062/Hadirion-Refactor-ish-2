@@ -435,7 +435,7 @@ func _show_category(kind: String) -> void:
 			_add_entry("%s  x%d" % [item.item_name, qty], _select_targets.bind("item", null, item), true, item.item_name, item.description)
 	elif kind == "guard":
 		var l: Label = Label.new()
-		l.text = "Guard\nHalves damage taken until the next round.\n+1 Energy at the start of your next turn."
+		l.text = "Guard\nMengurangi damage yang diterima turn ini.\n+1 energi di turn selanjutnya."
 		l.add_theme_font_size_override("font_size", 13)
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		_move_list.add_child(l)

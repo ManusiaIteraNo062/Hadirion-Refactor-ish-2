@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1fu01bqrwayw"
-path="res://.godot/imported/combat.png-78cd852eb11197939c251235d0a13843.ctex"
+uid="uid://c6dn1r2wg0ksj"
+path="res://.godot/imported/hurt.png-7d38d225953269f16dd51fcccaf0774e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/helder/combat.png"
-dest_files=["res://.godot/imported/combat.png-78cd852eb11197939c251235d0a13843.ctex"]
+source_file="res://assets/characters/radik/hurt.png"
+dest_files=["res://.godot/imported/hurt.png-7d38d225953269f16dd51fcccaf0774e.ctex"]
 
 [params]
 

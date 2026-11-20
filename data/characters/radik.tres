@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CharacterTemplate" format=3]
+[gd_resource type="Resource" script_class="CharacterTemplate" format=3 uid="uid://cdjqq6pmgdw60"]
 
-[ext_resource type="Script" path="res://scripts/data/character_template.gd" id="1_c0rds"]
+[ext_resource type="Script" uid="uid://jyr2afgrfuff" path="res://scripts/data/character_template.gd" id="1_c0rds"]
+[ext_resource type="SpriteFrames" uid="uid://cssimxntrgilm" path="res://assets/characters/radik/radik_frames.tres" id="2_42giw"]
 
 [resource]
 script = ExtResource("1_c0rds")
@@ -13,4 +14,5 @@ speed = 16
 base_upgrade_id = "radik_parang"
 basic_name = "Aparang"
 color = Color(0.95, 0.6, 0.25, 1)
+sprite_frames = ExtResource("2_42giw")
 party_order = 1
