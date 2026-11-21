@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="CharacterTemplate" format=3 uid="uid://fl84k1pigwuw"]
 
 [ext_resource type="Script" uid="uid://jyr2afgrfuff" path="res://scripts/data/character_template.gd" id="1_78s8e"]
+[ext_resource type="PackedScene" uid="uid://cdkls2gd253g7" path="res://scenes/vfx/attack/metal_clang.tscn" id="1_sjl5n"]
 [ext_resource type="SpriteFrames" uid="uid://77jooi71ija5" path="res://assets/characters/dean/dean_frames.tres" id="2_73ru0"]
+[ext_resource type="PackedScene" uid="uid://dgdplrw4doyf8" path="res://scenes/vfx/guard/mana_shield.tscn" id="2_ndkno"]
 
 [resource]
 script = ExtResource("1_78s8e")
@@ -15,4 +17,6 @@ base_upgrade_id = "dean_riot"
 basic_name = "Law & Order"
 color = Color(0.35, 0.5, 0.95, 1)
 sprite_frames = ExtResource("2_73ru0")
+attack_vfx = ExtResource("1_sjl5n")
+guard_vfx = ExtResource("2_ndkno")
 party_order = 2

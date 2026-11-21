@@ -20,3 +20,5 @@ class_name Item
 @export var energy_gain: int = 0          # Energy given to the target
 @export var buffs: Array[StatusApplication] = []  # statuses given to the target
 @export_multiline var description: String = ""     # Indonesian effect text
+# Plays on the target when the item is used (see PANDUAN_VFX.md).
+@export var vfx: PackedScene

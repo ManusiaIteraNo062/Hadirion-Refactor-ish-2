@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" format=3]
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://dhldr2y2taumy"]
 
-[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_cps0r"]
-[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_jxhv2"]
-[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_gxcgh"]
+[ext_resource type="Script" uid="uid://4xgi717k5nhv" path="res://scripts/data/move.gd" id="1_cps0r"]
+[ext_resource type="Script" uid="uid://cq4hf5fa0gfoj" path="res://scripts/data/status_application.gd" id="2_jxhv2"]
+[ext_resource type="Script" uid="uid://bbtkgrdsj2rct" path="res://scripts/data/skill.gd" id="3_gxcgh"]
+[ext_resource type="PackedScene" uid="uid://bd13sh28ttial" path="res://scenes/vfx/alterations/helder/magic_hit.tscn" id="4_jxhv2"]
 
 [sub_resource type="Resource" id="Resource_l1nir"]
 script = ExtResource("1_cps0r")
@@ -25,3 +26,4 @@ summary = "Menjentikkan percikan cahaya kecil yang melesat ke satu musuh."
 formula = "Damage = Strength."
 moves = Array[ExtResource("1_cps0r")]([SubResource("Resource_l1nir")])
 sort_order = 4
+vfx_hit = ExtResource("4_jxhv2")

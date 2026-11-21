@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://cr3vlem185fwq"]
+
+[ext_resource type="Texture2D" uid="uid://brxirbgbm3i0h" path="res://assets/vfx/items/buff_arrow.png" id="1_jfqto"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uil80"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(0, 0, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jclk4"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(40, 0, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f05tj"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(80, 0, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_386ju"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(120, 0, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u51p8"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(160, 0, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7aaax"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(200, 0, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8xt3"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(240, 0, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3lox"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(280, 0, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gyawk"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(0, 48, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrhqb"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(40, 48, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulc6s"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(80, 48, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_istfw"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(120, 48, 40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnrqd"]
+atlas = ExtResource("1_jfqto")
+region = Rect2(160, 48, 40, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htemk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uil80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jclk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f05tj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_386ju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u51p8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7aaax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8xt3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3lox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyawk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrhqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulc6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_istfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnrqd")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 16.7
+}]
+
+[node name="BuffArrow" type="AnimatedSprite2D" unique_id=362929048]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_htemk")
+frame = 12
+frame_progress = 1.0
+offset = Vector2(0, 4.5)

@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="CharacterTemplate" format=3 uid="uid://cdjqq6pmgdw60"]
 
 [ext_resource type="Script" uid="uid://jyr2afgrfuff" path="res://scripts/data/character_template.gd" id="1_c0rds"]
+[ext_resource type="PackedScene" uid="uid://chph8vn7g0bjt" path="res://scenes/vfx/attack/punch_hit.tscn" id="1_ergkg"]
 [ext_resource type="SpriteFrames" uid="uid://cssimxntrgilm" path="res://assets/characters/radik/radik_frames.tres" id="2_42giw"]
+[ext_resource type="PackedScene" uid="uid://te8mrajwd8js" path="res://scenes/vfx/guard/barrier_block.tscn" id="2_wo2te"]
 
 [resource]
 script = ExtResource("1_c0rds")
@@ -15,4 +17,6 @@ base_upgrade_id = "radik_parang"
 basic_name = "Aparang"
 color = Color(0.95, 0.6, 0.25, 1)
 sprite_frames = ExtResource("2_42giw")
+attack_vfx = ExtResource("1_ergkg")
+guard_vfx = ExtResource("2_wo2te")
 party_order = 1

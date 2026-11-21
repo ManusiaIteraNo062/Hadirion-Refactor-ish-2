@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://cdkls2gd253g7"]
+
+[ext_resource type="Texture2D" uid="uid://c0xptl0aihbqb" path="res://assets/vfx/attack/metal_clang.png" id="1_6astd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0kqr"]
+atlas = ExtResource("1_6astd")
+region = Rect2(0, 0, 58, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wf8o"]
+atlas = ExtResource("1_6astd")
+region = Rect2(58, 0, 58, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rb45s"]
+atlas = ExtResource("1_6astd")
+region = Rect2(116, 0, 58, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gaq1"]
+atlas = ExtResource("1_6astd")
+region = Rect2(174, 0, 58, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n60un"]
+atlas = ExtResource("1_6astd")
+region = Rect2(232, 0, 58, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p13j4"]
+atlas = ExtResource("1_6astd")
+region = Rect2(290, 0, 58, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrkcw"]
+atlas = ExtResource("1_6astd")
+region = Rect2(348, 0, 58, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bl5eo"]
+atlas = ExtResource("1_6astd")
+region = Rect2(406, 0, 58, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrbok"]
+atlas = ExtResource("1_6astd")
+region = Rect2(0, 44, 58, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyhej"]
+atlas = ExtResource("1_6astd")
+region = Rect2(58, 44, 58, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tss67"]
+atlas = ExtResource("1_6astd")
+region = Rect2(116, 44, 58, 44)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htemk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0kqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wf8o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rb45s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gaq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n60un")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p13j4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrkcw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bl5eo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrbok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyhej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tss67")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 16.7
+}]
+
+[node name="MetalClang" type="AnimatedSprite2D" unique_id=90883924]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_htemk")
+frame = 10
+frame_progress = 1.0
+offset = Vector2(5, -4)

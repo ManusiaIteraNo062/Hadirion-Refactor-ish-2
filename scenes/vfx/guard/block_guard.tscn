@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://ca70e45gca54o"]
+
+[ext_resource type="Texture2D" uid="uid://cescrwewae88m" path="res://assets/vfx/guard/block_guard.png" id="1_4qyy7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hhgv"]
+atlas = ExtResource("1_4qyy7")
+region = Rect2(0, 0, 48, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xed26"]
+atlas = ExtResource("1_4qyy7")
+region = Rect2(48, 0, 48, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdya6"]
+atlas = ExtResource("1_4qyy7")
+region = Rect2(96, 0, 48, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ak3n6"]
+atlas = ExtResource("1_4qyy7")
+region = Rect2(144, 0, 48, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axo77"]
+atlas = ExtResource("1_4qyy7")
+region = Rect2(192, 0, 48, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vn11n"]
+atlas = ExtResource("1_4qyy7")
+region = Rect2(240, 0, 48, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljkli"]
+atlas = ExtResource("1_4qyy7")
+region = Rect2(288, 0, 48, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ulno"]
+atlas = ExtResource("1_4qyy7")
+region = Rect2(336, 0, 48, 61)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hhgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xed26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdya6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ak3n6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axo77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vn11n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljkli")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ulno")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 16.67
+}]
+
+[node name="BlockGuard" type="AnimatedSprite2D" unique_id=1185274847]
+texture_filter = 1
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_fx")
+frame = 7
+frame_progress = 1.0
+offset = Vector2(2, 4)

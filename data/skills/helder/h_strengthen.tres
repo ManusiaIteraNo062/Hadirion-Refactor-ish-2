@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" format=3]
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://d1adnglw4brpr"]
 
-[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_mc8x3"]
-[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_04oyi"]
-[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_3vkmu"]
+[ext_resource type="Script" uid="uid://4xgi717k5nhv" path="res://scripts/data/move.gd" id="1_mc8x3"]
+[ext_resource type="Script" uid="uid://cq4hf5fa0gfoj" path="res://scripts/data/status_application.gd" id="2_04oyi"]
+[ext_resource type="Script" uid="uid://bbtkgrdsj2rct" path="res://scripts/data/skill.gd" id="3_3vkmu"]
+[ext_resource type="PackedScene" uid="uid://v8b7hyrijpqu" path="res://scenes/vfx/items/power_up_aura.tscn" id="4_04oyi"]
 
 [sub_resource type="Resource" id="Resource_phsoy"]
 script = ExtResource("2_04oyi")
@@ -31,3 +32,4 @@ cost_text = "1 Energy, 2x per misi"
 summary = "Cahaya hangat Oxypetalum menyelimuti Helder, menguatkan setiap pukulannya sampai misi selesai."
 formula = "Strength + (Capability / 4). Bisa dipakai 2 kali dan bertumpuk."
 moves = Array[ExtResource("1_mc8x3")]([SubResource("Resource_mkbgj")])
+vfx_hit = ExtResource("4_04oyi")

@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://c1xhi4dhsedeg"]
+
+[ext_resource type="Texture2D" uid="uid://ch5u38e4ylkv1" path="res://assets/vfx/alterations/radik/dash_dust.png" id="1_4aug0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbw7s"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(0, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trdxf"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(68, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs4tu"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(136, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sci1"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(204, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qapd"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(272, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yrr3"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(340, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4uce"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(408, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrmgo"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(476, 0, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwdhi"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(0, 32, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5b75l"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(68, 32, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlbia"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(136, 32, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qqwv"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(204, 32, 68, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsmip"]
+atlas = ExtResource("1_4aug0")
+region = Rect2(272, 32, 68, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htemk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbw7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trdxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs4tu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sci1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qapd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yrr3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4uce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wrmgo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwdhi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5b75l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hlbia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qqwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsmip")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 16.7
+}]
+
+[node name="DashDust" type="AnimatedSprite2D" unique_id=561432878]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_htemk")
+frame = 12
+frame_progress = 1.0
+offset = Vector2(10, 10.5)

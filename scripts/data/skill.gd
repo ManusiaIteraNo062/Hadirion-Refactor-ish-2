@@ -18,6 +18,11 @@ const UNLOCK_COST := 75
 @export var moves: Array[Move] = []
 # Position in the list (base skills first, then unlockable ones).
 @export var sort_order: int = 0
+# Effects (see PANDUAN_VFX.md): drag a scene from res://scenes/vfx/ into these slots.
+# Cast = plays on the caster when the skill starts. Hit = plays on every target when it lands.
+# Every move of the skill uses them (unless the Move has its own).
+@export var vfx_cast: PackedScene
+@export var vfx_hit: PackedScene
 
 # What it costs to learn: 0 for base skills, UNLOCK_COST for the others.
 var cost: int:
@@ -34,6 +39,10 @@ func build_moves() -> Array[Move]:
 		copy.description = summary
 		copy.formula = formula
 		copy.skill_id = id
+		if copy.vfx_cast == null:
+			copy.vfx_cast = vfx_cast
+		if copy.vfx_hit == null:
+			copy.vfx_hit = vfx_hit
 		out.append(copy)
 	return out
 

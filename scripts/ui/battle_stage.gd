@@ -59,6 +59,7 @@ func _ready() -> void:
 	battle_manager.attack_dodged.connect(_on_dodged)
 	battle_manager.action_announced.connect(_on_action_announced)
 	battle_manager.action_targeted.connect(_on_action_targeted)
+	battle_manager.action_landed.connect(_on_action_landed)
 	battle_manager.player_turn_started.connect(_on_player_turn_started)
 	battle_manager.enemy_turn_started.connect(_on_enemy_turn_started)
 	battle_manager.battle_ended.connect(_on_battle_ended)
@@ -199,7 +200,12 @@ func _on_action_announced(user: BattleUnit, action_name: String) -> void:
 	elif _has_move_named(user.alteration_moves, action_name):
 		fig.show_pose("alter", ALTER_POSE_SECONDS)
 		fig.flicker()
-		VfxPlayer.play(fig.alter_vfx, self, fig.vfx_position())
+		# This skill's own cast effect, or else the character's general Alter Vfx.
+		var cast_move: Move = _move_named(user.alteration_moves, action_name)
+		var cast_fx: PackedScene = fig.alter_vfx
+		if cast_move != null and cast_move.vfx_cast != null:
+			cast_fx = cast_move.vfx_cast
+		VfxPlayer.play(cast_fx, self, fig.vfx_position())
 		_announced_kind = "alter"
 	elif _has_move_named(user.basic_moves, action_name):
 		fig.show_pose("attack", ATTACK_POSE_SECONDS)
@@ -249,6 +255,39 @@ func _release_attacker() -> void:
 	_holding_attacker = false
 	_acting = null
 
+## The action takes effect now (the BattleManager emits this after any lead-in).
+## Plays the effects that belong to it (see PANDUAN_VFX.md):
+##   Alteration -> the skill's "Vfx Hit" on every target (its "Vfx Cast" played when it started)
+##   Item       -> the item's "Vfx" on every target
+##   Guard      -> the character's "Guard Vfx", on the character
+## Basic attacks are not handled here: their "Attack Vfx" plays when the hit lands (_show_hit).
+func _on_action_landed(user: BattleUnit, targets: Array, source: Resource) -> void:
+	if not _is_party(user) or not _figures.has(user):
+		return
+	if source == null:   # Guard
+		var user_fig: UnitVisual = _figures[user]
+		VfxPlayer.play(user_fig.guard_vfx, self, user_fig.vfx_position())
+		return
+	var move: Move = source as Move
+	var item: Item = source as Item
+	var effect: PackedScene = null
+	if move != null and _has_move_named(user.alteration_moves, move.move_name):
+		effect = move.vfx_hit
+	elif item != null:
+		effect = item.vfx
+	if effect == null:
+		return
+	for target in targets:
+		if _figures.has(target) and is_instance_valid(_figures[target]):
+			VfxPlayer.play(effect, self, _figures[target].vfx_position())
+
+## The move with this name in the list, or null.
+func _move_named(moves: Array, action_name: String) -> Move:
+	for move in moves:
+		if move.move_name == action_name:
+			return move
+	return null
+
 ## True for party members, false for enemies. (BattleUnit.is_player_controlled is
 ## never set to false for enemies, so it can't be used for this.)
 func _is_party(unit: BattleUnit) -> bool:
@@ -270,6 +309,7 @@ func _load_art(unit: BattleUnit, figure: UnitVisual, party: bool) -> void:
 			return
 		figure.attack_vfx = template.attack_vfx
 		figure.alter_vfx = template.alter_vfx
+		figure.guard_vfx = template.guard_vfx
 		# An animated sprite sheet wins over the single pictures.
 		if template.sprite_frames != null:
 			figure.set_animated_art(template.sprite_frames, false)

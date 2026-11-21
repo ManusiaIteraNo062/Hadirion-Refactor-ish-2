@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="CharacterTemplate" format=3 uid="uid://nbm2iiymo3a7"]
 
 [ext_resource type="Script" uid="uid://jyr2afgrfuff" path="res://scripts/data/character_template.gd" id="1_cn4tj"]
+[ext_resource type="PackedScene" uid="uid://c20ebppb1yoec" path="res://scenes/vfx/attack/hit_spark.tscn" id="1_gei5q"]
 [ext_resource type="SpriteFrames" uid="uid://ymnj7x5pqd78" path="res://assets/characters/helder/helder_frames.tres" id="2_frames"]
+[ext_resource type="PackedScene" uid="uid://ca70e45gca54o" path="res://scenes/vfx/guard/block_guard.tscn" id="2_vks2h"]
 
 [resource]
 script = ExtResource("1_cn4tj")
@@ -13,3 +15,5 @@ base_upgrade_id = "helder_baton"
 basic_name = "Drabo"
 color = Color(0.3, 0.75, 0.8, 1)
 sprite_frames = ExtResource("2_frames")
+attack_vfx = ExtResource("1_gei5q")
+guard_vfx = ExtResource("2_vks2h")

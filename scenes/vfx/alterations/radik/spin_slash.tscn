@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://q083ib2q60vd"]
+
+[ext_resource type="Texture2D" uid="uid://c1w7gr2cb41iw" path="res://assets/vfx/alterations/radik/spin_slash.png" id="1_uq1mm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhqe4"]
+atlas = ExtResource("1_uq1mm")
+region = Rect2(0, 0, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctukh"]
+atlas = ExtResource("1_uq1mm")
+region = Rect2(120, 0, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgeab"]
+atlas = ExtResource("1_uq1mm")
+region = Rect2(240, 0, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_niln0"]
+atlas = ExtResource("1_uq1mm")
+region = Rect2(360, 0, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpxry"]
+atlas = ExtResource("1_uq1mm")
+region = Rect2(480, 0, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7ijh"]
+atlas = ExtResource("1_uq1mm")
+region = Rect2(600, 0, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ok44x"]
+atlas = ExtResource("1_uq1mm")
+region = Rect2(720, 0, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f688w"]
+atlas = ExtResource("1_uq1mm")
+region = Rect2(840, 0, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7q5la"]
+atlas = ExtResource("1_uq1mm")
+region = Rect2(0, 72, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nf4b"]
+atlas = ExtResource("1_uq1mm")
+region = Rect2(120, 72, 120, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbdky"]
+atlas = ExtResource("1_uq1mm")
+region = Rect2(240, 72, 120, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htemk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhqe4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctukh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgeab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_niln0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpxry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7ijh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ok44x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f688w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7q5la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nf4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbdky")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 16.7
+}]
+
+[node name="SpinSlash" type="AnimatedSprite2D" unique_id=420741473]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_htemk")
+frame = 10
+frame_progress = 1.0
+offset = Vector2(0, 2)

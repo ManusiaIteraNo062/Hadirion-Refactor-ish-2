@@ -115,6 +115,16 @@ func damage_per_hit(strength: int, capability: int, speed: int) -> int:
 @export var formula: String = ""                 # the damage / effect calculation
 var skill_id: String = ""                        # which SkillLibrary skill built it (for the live preview)
 
+# --- Effects (see PANDUAN_VFX.md) ---------------------------------------------
+# Drag a scene from res://scenes/vfx/ into these slots. Usually you fill them on the SKILL
+# (Skill > Vfx Cast / Vfx Hit) and every move of the skill gets them; fill them here only
+# to give ONE move its own effect.
+# Plays on the user when the move starts (instead of the character's Alter Vfx).
+@export var vfx_cast: PackedScene
+# Plays on every target when the move lands. Alterations only: Basic attacks use the
+# character's Attack Vfx.
+@export var vfx_hit: PackedScene
+
 # Heals the user for this x Capability (rounded DOWN) on top of self_heal_flat, once per use
 # (Encompass: 15 + Capability / 4).
 @export var self_heal_per_cap: float = 0.0

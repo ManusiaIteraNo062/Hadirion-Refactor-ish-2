@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" format=3]
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://c7wqpej061cic"]
 
-[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_uxs8b"]
-[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_u6vli"]
-[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_r30pi"]
+[ext_resource type="Script" uid="uid://4xgi717k5nhv" path="res://scripts/data/move.gd" id="1_uxs8b"]
+[ext_resource type="Script" uid="uid://cq4hf5fa0gfoj" path="res://scripts/data/status_application.gd" id="2_u6vli"]
+[ext_resource type="Script" uid="uid://bbtkgrdsj2rct" path="res://scripts/data/skill.gd" id="3_r30pi"]
+[ext_resource type="PackedScene" uid="uid://bm01i0bm4ar5f" path="res://scenes/vfx/alterations/helder/holy_nova.tscn" id="4_u6vli"]
 
 [sub_resource type="Resource" id="Resource_mqnc5"]
 script = ExtResource("1_uxs8b")
@@ -26,3 +27,4 @@ summary = "Meledakkan kilau putih ke semua musuh, lalu menyerap sebagian cahayan
 formula = "Damage = 10 + (Strength / 5) ke semua musuh. Pulih 30% dari damage yang diberikan."
 moves = Array[ExtResource("1_uxs8b")]([SubResource("Resource_mqnc5")])
 sort_order = 2
+vfx_hit = ExtResource("4_u6vli")

@@ -1,0 +1,158 @@
+[gd_scene format=3 uid="uid://dgdplrw4doyf8"]
+
+[ext_resource type="Texture2D" uid="uid://bc6dtwtcsi2hg" path="res://assets/vfx/guard/mana_shield.png" id="1_862st"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0tyo"]
+atlas = ExtResource("1_862st")
+region = Rect2(0, 0, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmc4l"]
+atlas = ExtResource("1_862st")
+region = Rect2(80, 0, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb8np"]
+atlas = ExtResource("1_862st")
+region = Rect2(160, 0, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kog1i"]
+atlas = ExtResource("1_862st")
+region = Rect2(240, 0, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_084my"]
+atlas = ExtResource("1_862st")
+region = Rect2(320, 0, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7b5ua"]
+atlas = ExtResource("1_862st")
+region = Rect2(400, 0, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hx84d"]
+atlas = ExtResource("1_862st")
+region = Rect2(480, 0, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3nt6"]
+atlas = ExtResource("1_862st")
+region = Rect2(560, 0, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5e7h"]
+atlas = ExtResource("1_862st")
+region = Rect2(0, 76, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnw5b"]
+atlas = ExtResource("1_862st")
+region = Rect2(80, 76, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hod6"]
+atlas = ExtResource("1_862st")
+region = Rect2(160, 76, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yx8v7"]
+atlas = ExtResource("1_862st")
+region = Rect2(240, 76, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxt5x"]
+atlas = ExtResource("1_862st")
+region = Rect2(320, 76, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_428k3"]
+atlas = ExtResource("1_862st")
+region = Rect2(400, 76, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqnrn"]
+atlas = ExtResource("1_862st")
+region = Rect2(480, 76, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_531qv"]
+atlas = ExtResource("1_862st")
+region = Rect2(560, 76, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5825o"]
+atlas = ExtResource("1_862st")
+region = Rect2(0, 152, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgn5f"]
+atlas = ExtResource("1_862st")
+region = Rect2(80, 152, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0f5iv"]
+atlas = ExtResource("1_862st")
+region = Rect2(160, 152, 80, 76)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fk440"]
+atlas = ExtResource("1_862st")
+region = Rect2(240, 152, 80, 76)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htemk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0tyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmc4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb8np")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kog1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_084my")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7b5ua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hx84d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3nt6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5e7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnw5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hod6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yx8v7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxt5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_428k3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqnrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_531qv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5825o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgn5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0f5iv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fk440")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 14.3
+}]
+
+[node name="ManaShield" type="AnimatedSprite2D" unique_id=1000501206]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_htemk")
+frame_progress = 0.98714334
+offset = Vector2(0, -5.5)

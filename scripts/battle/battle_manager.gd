@@ -24,6 +24,9 @@ signal action_announced(user: BattleUnit, action_name: String)
 ## Who that action is aimed at (emitted right after action_announced; Guard has no targets).
 ## The battle stage uses it to make a fighter jump next to its target before the hit lands.
 signal action_targeted(user: BattleUnit, targets: Array)
+## The action takes effect NOW (after the visual lead-in). `source` is the Move, the Item, or null for Guard.
+## The stage plays skill / item / Guard effects at this moment.
+signal action_landed(user: BattleUnit, targets: Array, source: Resource)
 ## An enemy shows up (battle start or a new wave): the encyclopedia remembers it.
 signal enemy_met(unit: BattleUnit)
 ## An attack missed. Emitted for EVERY attack, damaging or not (the UI shows "Dodge!").
@@ -293,6 +296,9 @@ func _execute_action(unit: BattleUnit, action_data: Dictionary) -> void:
 		await get_tree().create_timer(lead_in).timeout
 		if _stopped:
 			return
+
+	# The action takes effect now: the stage plays skill / item / Guard effects at this moment.
+	action_landed.emit(unit, targets, action_data.get("move", action_data.get("item", null)))
 
 	match type:
 		"enemy_move":

@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://c20ebppb1yoec"]
+
+[ext_resource type="Texture2D" uid="uid://budwfrkem1ax5" path="res://assets/vfx/attack/hit_spark.png" id="1_yn7jg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecruu"]
+atlas = ExtResource("1_yn7jg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnoie"]
+atlas = ExtResource("1_yn7jg")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ruqd"]
+atlas = ExtResource("1_yn7jg")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv8ru"]
+atlas = ExtResource("1_yn7jg")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7voy"]
+atlas = ExtResource("1_yn7jg")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtcrj"]
+atlas = ExtResource("1_yn7jg")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pahtb"]
+atlas = ExtResource("1_yn7jg")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifeat"]
+atlas = ExtResource("1_yn7jg")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecruu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnoie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ruqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wv8ru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7voy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtcrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pahtb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifeat")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 12.5
+}]
+
+[node name="HitSpark" type="AnimatedSprite2D" unique_id=674239166]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_fx")
+frame = 7
+frame_progress = 1.0

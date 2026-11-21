@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://bauoohbum32q5"]
+
+[ext_resource type="Texture2D" uid="uid://ds1g1tf1ef6m3" path="res://assets/vfx/alterations/helder/bloom_heal.png" id="1_6mdhy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5opbk"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(0, 0, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0ocs"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(56, 0, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhcx0"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(112, 0, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yrrx"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(168, 0, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qaj8e"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(224, 0, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfc36"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(280, 0, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1aub"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(336, 0, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vnrh"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(392, 0, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lyge"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(0, 64, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brhhb"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(56, 64, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x051t"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(112, 64, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yyej"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(168, 64, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bma85"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(224, 64, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4stau"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(280, 64, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgua1"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(336, 64, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s26qe"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(392, 64, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_765qx"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(0, 128, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tywdu"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(56, 128, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tnvt"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(112, 128, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgdka"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(168, 128, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8210u"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(224, 128, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmi4n"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(280, 128, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ruw3o"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(336, 128, 56, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mifgi"]
+atlas = ExtResource("1_6mdhy")
+region = Rect2(392, 128, 56, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5opbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0ocs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhcx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yrrx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qaj8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfc36")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1aub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vnrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lyge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brhhb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x051t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yyej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bma85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4stau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgua1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s26qe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_765qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tywdu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tnvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgdka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8210u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmi4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ruw3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mifgi")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 14.29
+}]
+
+[node name="BloomHeal" type="AnimatedSprite2D" unique_id=1680026570]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_fx")
+frame = 23
+frame_progress = 1.0
+offset = Vector2(0, -0.5)

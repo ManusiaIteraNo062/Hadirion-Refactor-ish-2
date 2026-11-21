@@ -1,0 +1,3 @@
+Visual effects: PVFX Foundry 1.2 (CC0 / public domain).
+Source pack: pvfx-foundry-thirteen-spritesheets.zip  (see its LICENSE.txt and THIRD_PARTY_NOTICES.txt).
+Credit is not required, but a line in the game's credits screen is appreciated.

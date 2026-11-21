@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://bd13sh28ttial"]
+
+[ext_resource type="Texture2D" uid="uid://b418411mo0wr0" path="res://assets/vfx/alterations/helder/magic_hit.png" id="1_kiykc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26w76"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mr3sd"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwgjf"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sra5y"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87sq3"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3olr"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lnel"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s0b1"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8dd6"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwwgu"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ankb"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1q6e3"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a2px"]
+atlas = ExtResource("1_kiykc")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htemk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26w76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mr3sd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwgjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sra5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87sq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3olr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lnel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s0b1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8dd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwwgu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ankb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1q6e3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a2px")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 16.7
+}]
+
+[node name="MagicHit" type="AnimatedSprite2D" unique_id=2029743727]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_htemk")
+frame = 12
+frame_progress = 1.0

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" format=3]
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://lpunksgbx88g"]
 
-[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_bjxn3"]
-[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_pri30"]
-[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_g6k6c"]
+[ext_resource type="Script" uid="uid://4xgi717k5nhv" path="res://scripts/data/move.gd" id="1_bjxn3"]
+[ext_resource type="Script" uid="uid://cq4hf5fa0gfoj" path="res://scripts/data/status_application.gd" id="2_pri30"]
+[ext_resource type="Script" uid="uid://bbtkgrdsj2rct" path="res://scripts/data/skill.gd" id="3_g6k6c"]
+[ext_resource type="PackedScene" uid="uid://dye446y26aho8" path="res://scenes/vfx/alterations/radik/haste.tscn" id="4_pri30"]
 
 [sub_resource type="Resource" id="Resource_1fhe4"]
 script = ExtResource("2_pri30")
@@ -33,3 +34,4 @@ summary = "Radik menyalakan semangatnya, bergerak makin ringan dan makin cepat s
 formula = "Speed + (Capability / 4)."
 moves = Array[ExtResource("1_bjxn3")]([SubResource("Resource_23y7l")])
 sort_order = 8
+vfx_hit = ExtResource("4_pri30")

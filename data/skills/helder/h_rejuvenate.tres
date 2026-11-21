@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" format=3]
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://cags55b20ujil"]
 
-[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_8ngc4"]
-[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_rnjuh"]
-[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_0kax6"]
+[ext_resource type="Script" uid="uid://4xgi717k5nhv" path="res://scripts/data/move.gd" id="1_8ngc4"]
+[ext_resource type="Script" uid="uid://cq4hf5fa0gfoj" path="res://scripts/data/status_application.gd" id="2_rnjuh"]
+[ext_resource type="Script" uid="uid://bbtkgrdsj2rct" path="res://scripts/data/skill.gd" id="3_0kax6"]
+[ext_resource type="PackedScene" uid="uid://bauoohbum32q5" path="res://scenes/vfx/alterations/helder/bloom_heal.tscn" id="4_rnjuh"]
 
 [sub_resource type="Resource" id="Resource_0f0rg"]
 script = ExtResource("1_8ngc4")
@@ -28,3 +29,4 @@ summary = "Menebar kelopak cahaya yang menyembuhkan seluruh tim."
 formula = "Pulih = Capability / 2 untuk setiap anggota tim."
 moves = Array[ExtResource("1_8ngc4")]([SubResource("Resource_0f0rg")])
 sort_order = 3
+vfx_hit = ExtResource("4_rnjuh")

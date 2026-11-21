@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://du36it373unw4"]
+
+[ext_resource type="Texture2D" uid="uid://ct7y84f7rebo6" path="res://assets/vfx/alterations/radik/crit_hit.png" id="1_81kp5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vul20"]
+atlas = ExtResource("1_81kp5")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsshl"]
+atlas = ExtResource("1_81kp5")
+region = Rect2(96, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gma7h"]
+atlas = ExtResource("1_81kp5")
+region = Rect2(192, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gc8qn"]
+atlas = ExtResource("1_81kp5")
+region = Rect2(288, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5py1"]
+atlas = ExtResource("1_81kp5")
+region = Rect2(384, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vvah"]
+atlas = ExtResource("1_81kp5")
+region = Rect2(480, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2t1so"]
+atlas = ExtResource("1_81kp5")
+region = Rect2(576, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x622a"]
+atlas = ExtResource("1_81kp5")
+region = Rect2(672, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2kfmb"]
+atlas = ExtResource("1_81kp5")
+region = Rect2(0, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vexog"]
+atlas = ExtResource("1_81kp5")
+region = Rect2(96, 80, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gygh"]
+atlas = ExtResource("1_81kp5")
+region = Rect2(192, 80, 96, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htemk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vul20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsshl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gma7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gc8qn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5py1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vvah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2t1so")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x622a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2kfmb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vexog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gygh")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 14.3
+}]
+
+[node name="CritHit" type="AnimatedSprite2D" unique_id=2019004839]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_htemk")
+frame = 10
+frame_progress = 1.0

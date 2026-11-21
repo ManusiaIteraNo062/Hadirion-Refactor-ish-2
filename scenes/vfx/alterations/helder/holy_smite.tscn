@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://d0eduyuhpooa5"]
+
+[ext_resource type="Texture2D" uid="uid://x23uxy5eghtl" path="res://assets/vfx/alterations/helder/holy_smite.png" id="1_kdho5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri6va"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(0, 0, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dnar"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(80, 0, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngc8h"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(160, 0, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atfy8"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(240, 0, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45t3k"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(320, 0, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5n0mi"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(400, 0, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77otb"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(480, 0, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f4ns"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(560, 0, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cik5w"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(0, 120, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v23jq"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(80, 120, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjank"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(160, 120, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sq01u"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(240, 120, 80, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu7ak"]
+atlas = ExtResource("1_kdho5")
+region = Rect2(320, 120, 80, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htemk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri6va")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dnar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ngc8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atfy8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45t3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5n0mi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77otb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f4ns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cik5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v23jq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjank")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sq01u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu7ak")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 12.5
+}]
+
+[node name="HolySmite" type="AnimatedSprite2D" unique_id=304465102]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_htemk")
+frame = 12
+frame_progress = 1.0
+offset = Vector2(0, -3)

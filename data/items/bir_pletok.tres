@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Item" format=3]
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://b4kres2irs3ao"]
 
-[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="1_m0njk"]
-[ext_resource type="Script" path="res://scripts/data/item.gd" id="2_3hobc"]
+[ext_resource type="Script" uid="uid://cq4hf5fa0gfoj" path="res://scripts/data/status_application.gd" id="1_m0njk"]
+[ext_resource type="Script" uid="uid://crbdm2xqsw5qx" path="res://scripts/data/item.gd" id="2_3hobc"]
+[ext_resource type="PackedScene" uid="uid://cr3vlem185fwq" path="res://scenes/vfx/items/buff_arrow.tscn" id="3_3hobc"]
 
 [resource]
 script = ExtResource("2_3hobc")
@@ -14,3 +15,4 @@ heal_amount = 0
 heal_pct = 10.0
 energy_gain = 4
 description = "Memulihkan 10% HP dan memberi 4 Energy."
+vfx = ExtResource("3_3hobc")

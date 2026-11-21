@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Skill" format=3]
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://bw867sp2bls6k"]
 
-[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_jdo4r"]
-[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="2_db26d"]
-[ext_resource type="Script" path="res://scripts/data/skill.gd" id="3_sb6a0"]
+[ext_resource type="Script" uid="uid://4xgi717k5nhv" path="res://scripts/data/move.gd" id="1_jdo4r"]
+[ext_resource type="Script" uid="uid://cq4hf5fa0gfoj" path="res://scripts/data/status_application.gd" id="2_db26d"]
+[ext_resource type="Script" uid="uid://bbtkgrdsj2rct" path="res://scripts/data/skill.gd" id="3_sb6a0"]
+[ext_resource type="PackedScene" uid="uid://cec3fmwnv0qsu" path="res://scenes/vfx/alterations/radik/quickdraw_slash.tscn" id="4_db26d"]
 
 [sub_resource type="Resource" id="Resource_jh1d7"]
 script = ExtResource("1_jdo4r")
@@ -25,3 +26,4 @@ summary = "Dua tebasan beruntun yang datang lebih cepat dari kedipan mata."
 formula = "Damage = 10 + (Capability / 2), sebanyak 2 kali."
 moves = Array[ExtResource("1_jdo4r")]([SubResource("Resource_jh1d7")])
 sort_order = 6
+vfx_hit = ExtResource("4_db26d")

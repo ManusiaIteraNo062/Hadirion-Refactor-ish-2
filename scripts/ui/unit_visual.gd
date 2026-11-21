@@ -52,6 +52,7 @@ const FIGURE_HEIGHT := 122.0
 ## Effects (set by the stage from the character / enemy data).
 var attack_vfx: PackedScene
 var alter_vfx: PackedScene
+var guard_vfx: PackedScene
 ## True once dragged off / faded out, so a window resize doesn't put it back.
 var gone: bool = false
 

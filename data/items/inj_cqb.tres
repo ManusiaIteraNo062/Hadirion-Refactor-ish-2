@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Item" format=3]
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bdnlqb5nsvioq"]
 
-[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="1_kfd8s"]
-[ext_resource type="Script" path="res://scripts/data/item.gd" id="2_gnksi"]
+[ext_resource type="Script" uid="uid://cq4hf5fa0gfoj" path="res://scripts/data/status_application.gd" id="1_kfd8s"]
+[ext_resource type="Script" uid="uid://crbdm2xqsw5qx" path="res://scripts/data/item.gd" id="2_gnksi"]
+[ext_resource type="PackedScene" uid="uid://v8b7hyrijpqu" path="res://scenes/vfx/items/power_up_aura.tscn" id="3_gnksi"]
 
 [sub_resource type="Resource" id="Resource_lfxed"]
 script = ExtResource("1_kfd8s")
@@ -17,3 +18,4 @@ cost = 50
 heal_amount = 0
 buffs = Array[ExtResource("1_kfd8s")]([SubResource("Resource_lfxed")])
 description = "Buff \"Inj-CQB\": +5 Speed dan +10 Strength selama 3 giliran. Setelah habis, penerima kehilangan 10% HP maksimal."
+vfx = ExtResource("3_gnksi")

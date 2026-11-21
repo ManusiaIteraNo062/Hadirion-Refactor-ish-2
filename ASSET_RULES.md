@@ -62,8 +62,14 @@ Animation names matter. Only `idle` is required; a missing one just shows idle.
 Each effect is a scene (`.tscn`). Put them in `assets/vfx/` or `scenes/vfx/`, then drag
 them into the character / enemy `.tres`:
 
-* **Attack Vfx** (character or enemy): plays on the *target* when the attack hits.
-* **Alter Vfx** (character only): plays on the character while they use an Alteration.
+Slots (step-by-step guide: `PANDUAN_VFX.md`):
+* **Attack Vfx** (character or enemy): plays on the *target* when the Basic attack hits.
+* **Guard Vfx** (character only): plays on the character when they Guard.
+* **Vfx Cast / Vfx Hit** on each Skill `.tres` in `data/skills/` (one Move can override them):
+  Cast plays on the caster when an Alteration starts, Hit plays on every target when it lands.
+* **Alter Vfx** (character only): plays on the character while they use an Alteration - the
+  fallback when the skill has no Vfx Cast.
+* **Vfx** on each Item `.tres` in `data/items/`: plays on the target when the item is used.
 
 The effect is centred on the middle of the fighter (its (0, 0) point is where it appears).
 What the scene can be:

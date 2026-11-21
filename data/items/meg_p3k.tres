@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Item" format=3]
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dthtwqyi4nraq"]
 
-[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="1_31jjs"]
-[ext_resource type="Script" path="res://scripts/data/item.gd" id="2_s5b1y"]
+[ext_resource type="Script" uid="uid://cq4hf5fa0gfoj" path="res://scripts/data/status_application.gd" id="1_31jjs"]
+[ext_resource type="Script" uid="uid://crbdm2xqsw5qx" path="res://scripts/data/item.gd" id="2_s5b1y"]
+[ext_resource type="PackedScene" uid="uid://bgbhusaov60iu" path="res://scenes/vfx/items/ressurect.tscn" id="3_s5b1y"]
 
 [resource]
 script = ExtResource("2_s5b1y")
@@ -13,3 +14,4 @@ heal_amount = 0
 heal_pct = 15.0
 revive = true
 description = "Menghidupkan kembali rekan yang tumbang dengan 15% HP."
+vfx = ExtResource("3_s5b1y")

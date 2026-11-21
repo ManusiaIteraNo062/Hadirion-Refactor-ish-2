@@ -32,5 +32,7 @@ class_name CharacterTemplate
 @export var attack_vfx: PackedScene
 ## Played on this character while they use an Alteration.
 @export var alter_vfx: PackedScene
+## Played on this character when they Guard.
+@export var guard_vfx: PackedScene
 ## Position in the party (0 = first).
 @export var party_order: int = 0

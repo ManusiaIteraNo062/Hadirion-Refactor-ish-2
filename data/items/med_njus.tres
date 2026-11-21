@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Item" format=3]
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://8egngk2pwbn8"]
 
-[ext_resource type="Script" path="res://scripts/data/status_application.gd" id="1_vs2hd"]
-[ext_resource type="Script" path="res://scripts/data/item.gd" id="2_tpyqj"]
+[ext_resource type="Script" uid="uid://cq4hf5fa0gfoj" path="res://scripts/data/status_application.gd" id="1_vs2hd"]
+[ext_resource type="Script" uid="uid://crbdm2xqsw5qx" path="res://scripts/data/item.gd" id="2_tpyqj"]
+[ext_resource type="PackedScene" uid="uid://dcjptbj7oarrw" path="res://scenes/vfx/items/heal_plus.tscn" id="3_tpyqj"]
 
 [resource]
 script = ExtResource("2_tpyqj")
@@ -13,3 +14,4 @@ cost = 5
 heal_amount = 0
 heal_pct = 20.0
 description = "Memulihkan 20% HP."
+vfx = ExtResource("3_tpyqj")

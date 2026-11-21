@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="CharacterTemplate" format=3 uid="uid://dmt1sl2j55j01"]
 
+[ext_resource type="PackedScene" uid="uid://cnsc2n56fu2fc" path="res://scenes/vfx/attack/laser_impact.tscn" id="1_536vc"]
 [ext_resource type="Script" uid="uid://jyr2afgrfuff" path="res://scripts/data/character_template.gd" id="1_ie7ho"]
+[ext_resource type="PackedScene" uid="uid://bxnachsxsg7el" path="res://scenes/vfx/guard/energy_shield.tscn" id="2_8j77r"]
 [ext_resource type="SpriteFrames" uid="uid://beqswetojv1fk" path="res://assets/characters/wyg01/wyg01_frames.tres" id="2_a37wi"]
 
 [resource]
@@ -15,4 +17,6 @@ base_upgrade_id = "wyg_frame"
 basic_name = "Mech Fist"
 color = Color(0.7, 0.45, 0.85, 1)
 sprite_frames = ExtResource("2_a37wi")
+attack_vfx = ExtResource("1_536vc")
+guard_vfx = ExtResource("2_8j77r")
 party_order = 3

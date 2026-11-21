@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://bm01i0bm4ar5f"]
+
+[ext_resource type="Texture2D" uid="uid://cpwej6jsw1xb3" path="res://assets/vfx/alterations/helder/holy_nova.png" id="1_o5qdr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6dhe"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(0, 0, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq1ex"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(128, 0, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i24fi"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(256, 0, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p71n"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(384, 0, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atqhi"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(512, 0, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4xsg"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(640, 0, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31gpi"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(768, 0, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfgnm"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(896, 0, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwgpe"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(0, 108, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mv17"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(128, 108, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yvwo"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(256, 108, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g888y"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(384, 108, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_guf2o"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(512, 108, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prmh6"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(640, 108, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw1x5"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(768, 108, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73gok"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(896, 108, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yw3h4"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(0, 216, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pa2tp"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(128, 216, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8ciw"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(256, 216, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wt7ht"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(384, 216, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wr4nm"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(512, 216, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o7ju"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(640, 216, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7y45"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(768, 216, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uasmw"]
+atlas = ExtResource("1_o5qdr")
+region = Rect2(896, 216, 128, 108)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_htemk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6dhe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq1ex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i24fi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p71n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atqhi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4xsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31gpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfgnm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwgpe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mv17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yvwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g888y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_guf2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prmh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw1x5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73gok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yw3h4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pa2tp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8ciw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wt7ht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wr4nm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2o7ju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7y45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uasmw")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 14.3
+}]
+
+[node name="HolyNova" type="AnimatedSprite2D" unique_id=1711807991]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_htemk")
+frame = 23
+frame_progress = 1.0
+offset = Vector2(0, 6)
